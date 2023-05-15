@@ -1,11 +1,8 @@
 import './globals.css'
-import { Inter } from 'next/font/google'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
   title: 'E17 Expo',
-  description: 'E17 Expo',
+  description: 'Dit jaar staan we stil bij de 50ste verjaardag van de E3/E17',
 }
 
 export default function RootLayout({
@@ -15,7 +12,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="nl">
-      <body className={inter.className}>{children}</body>
+      <body>{children}</body>
     </html>
   )
 }
