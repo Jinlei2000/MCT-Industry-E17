@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-export default function Page() {
+export default function Home() {
   return (
     <main className="p-10">
       <h1 className="flex  p-4 pt-2 text-9xl">HELLO WORLD</h1>
