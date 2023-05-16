@@ -1,34 +1,38 @@
 'use client'
+import useFireStore from '@/hooks/useFireStore'
 
 export default () => {
-  const goToHome = () => {
-    console.log('go to home')
-  }
-  const goToDetail = () => {
-    console.log('go to detail')
-  }
+  const { updateCurrentPage, setRandomPhotoIdByType, updatePhotoId } =
+    useFireStore()
 
   return (
-    <main className="flex h-screen flex-col items-center justify-center">
-      <h1 className="mb-8 text-4xl font-bold">Controls</h1>
+    <main className="">
       <button
-        className="rounded bg-blue-500 px-4 py-2 text-lg font-medium text-white hover:bg-blue-600"
-        onClick={() => goToHome()}
+        className="absolute left-0 top-0 rounded bg-blue-500 px-4 py-2 text-lg font-medium text-white hover:bg-blue-600"
+        onClick={() => updateCurrentPage('home')}
       >
         Ga terug
       </button>
-      <button
-        className="rounded bg-blue-500 px-4 py-2 text-lg font-medium text-white hover:bg-blue-600"
-        onClick={() => goToDetail()}
-      >
-        Lucht
-      </button>
-      <button
-        className="rounded bg-blue-500 px-4 py-2 text-lg font-medium text-white hover:bg-blue-600"
-        onClick={() => goToDetail()}
-      >
-        Grond
-      </button>
+      {/* center in middle of screen */}
+      <div className="flex h-screen flex-col items-center justify-center">
+        <h1 className="mb-8 text-4xl font-bold">Controls</h1>
+        <button
+          className="rounded bg-blue-500 px-4 py-2 text-lg font-medium text-white hover:bg-blue-600"
+          onClick={() => {
+            setRandomPhotoIdByType('skyPics')
+          }}
+        >
+          Lucht
+        </button>
+        <button
+          className="rounded bg-blue-500 px-4 py-2 text-lg font-medium text-white hover:bg-blue-600"
+          onClick={() => {
+            setRandomPhotoIdByType('groundPics')
+          }}
+        >
+          Grond
+        </button>
+      </div>
     </main>
   )
 }
