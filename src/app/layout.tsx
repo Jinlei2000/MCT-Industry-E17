@@ -1,4 +1,4 @@
-import './globals.css'
+import '../assets/globals.css'
 
 export const metadata = {
   title: 'E17 Expo',
