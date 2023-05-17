@@ -1,17 +1,14 @@
-import Link from 'next/link'
+'use client'
+import useFireStore from '@/hooks/useFireStore'
 
-export default function Page() {
+export default function Home() {
+  const { listenToChangePage } = useFireStore()
+
+  listenToChangePage('/detail')
+
   return (
-    <main className="p-10">
-      <h1 className="flex  p-4 pt-2 text-9xl">HELLO WORLD</h1>
-      <div className='flex gap-3'>
-        <Link href="/detail" className="rounded-md bg-blue-500 p-4 text-white">
-          DETAIL
-        </Link>
-        <Link href="/controls" className="rounded-md bg-blue-500 p-4 text-white">
-          CONTROLS
-        </Link>
-      </div>
+    <main className="flex h-screen flex-col items-center justify-center">
+      <h1 className="mb-8 text-9xl font-bold">Home Page</h1>
     </main>
   )
 }

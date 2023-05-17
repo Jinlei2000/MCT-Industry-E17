@@ -1,12 +1,38 @@
-import Link from 'next/link'
+'use client'
+import useFireStore from '@/hooks/useFireStore'
 
 export default () => {
+  const { updateCurrentPage, setRandomPhotoIdByType, updatePhotoId } =
+    useFireStore()
+
   return (
-    <main className="p-10">
-      <h1 className="flex  p-4 pt-2 text-9xl">CONTROLS</h1>
-      <Link href="/" className="rounded-md bg-blue-500 p-4 text-white">
-        HOME
-      </Link>
+    <main className="">
+      <button
+        className="absolute left-0 top-0 rounded bg-blue-500 px-4 py-2 text-lg font-medium text-white hover:bg-blue-600"
+        onClick={() => updateCurrentPage('/')}
+      >
+        Ga terug
+      </button>
+      {/* center in middle of screen */}
+      <div className="flex h-screen flex-col items-center justify-center">
+        <h1 className="mb-8 text-4xl font-bold">Controls</h1>
+        <button
+          className="rounded bg-blue-500 px-4 py-2 text-lg font-medium text-white hover:bg-blue-600"
+          onClick={() => {
+            setRandomPhotoIdByType('skyPics')
+          }}
+        >
+          Lucht
+        </button>
+        <button
+          className="rounded bg-blue-500 px-4 py-2 text-lg font-medium text-white hover:bg-blue-600"
+          onClick={() => {
+            setRandomPhotoIdByType('groundPics')
+          }}
+        >
+          Grond
+        </button>
+      </div>
     </main>
   )
 }
