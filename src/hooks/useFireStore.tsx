@@ -1,4 +1,5 @@
 import IConfig from '@/interfaces/IConfig'
+import IPhoto from '@/interfaces/IPhoto'
 import { initializeApp } from 'firebase/app'
 import {
   getFirestore,
@@ -7,6 +8,7 @@ import {
   doc,
   onSnapshot,
   updateDoc,
+  getDoc,
 } from 'firebase/firestore'
 import { useRouter } from 'next/navigation'
 
@@ -47,7 +49,7 @@ export default () => {
     await getConfig().then(oldConfig => {
       newConfig = { ...oldConfig, ...config }
     })
-   
+
     updateDoc(doc(db, 'config', 'YnfWtqVDB8vyURRmpFTC'), newConfig as any)
   }
 
@@ -62,11 +64,34 @@ export default () => {
 
     const randomIndex = Math.floor(Math.random() * photosId.length)
 
-    await updateConfig({ photoId: photosId[randomIndex], currentPage: '/detail', photoType: picsType })
+    await updateConfig({
+      photoId: photosId[randomIndex],
+      currentPage: '/detail',
+      photoType: picsType,
+    })
   }
 
   // get photo by id
-  const getPhotoById = async () => {}
+  const getPhotoById = async (): Promise<IPhoto> => {
+    const config = await getConfig()
+    console.log(config)
+    let photo: IPhoto = {}
+
+    if (config.photoType && config.photoId) {
+      const docRef = doc(db, config.photoType, config.photoId)
+      // get groundPics or skyPics document
+      const docSnap = await getDoc(docRef)
+      photo = { ...(docSnap.data() as IPhoto) }
+      // get generatedPics subcollection
+      const docSnap2 = await getDocs(collection(docRef, 'generatedPics'))
+      docSnap2.forEach(doc => {
+        photo.generatedPics = { ...doc.data() }
+      })
+    }
+
+    console.log(photo)
+    return photo
+  }
 
   // LISTENERS
   // listen to the config
@@ -84,10 +109,9 @@ export default () => {
 
   return {
     getConfig,
-    // updateCurrentPage,
-    // updatePhotoId,
     setRandomPhotoIdByType,
     listenToChangePage,
     updateConfig,
+    getPhotoById,
   }
 }

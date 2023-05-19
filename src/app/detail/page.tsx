@@ -2,9 +2,11 @@
 import useFireStore from '@/hooks/useFireStore'
 
 export default () => {
-  const { listenToChangePage } = useFireStore()
+  const { listenToChangePage, getPhotoById } = useFireStore()
 
   listenToChangePage('/')
+
+  getPhotoById()
 
   return (
     <main className="p-10">
