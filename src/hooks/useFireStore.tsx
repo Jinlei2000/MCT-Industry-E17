@@ -74,7 +74,7 @@ export default () => {
   // get photo by id
   const getPhotoById = async (): Promise<IPhoto> => {
     const config = await getConfig()
-    console.log(config)
+    // console.log(config)
     let photo: IPhoto = {}
 
     if (config.photoType && config.photoId) {
@@ -89,21 +89,30 @@ export default () => {
       })
     }
 
-    console.log(photo)
+    // console.log(photo)
     return photo
   }
 
   // LISTENERS
-  // listen to the config
+  // listen to change page
   const listenToChangePage = (path: string) => {
     onSnapshot(doc(db, 'config', 'YnfWtqVDB8vyURRmpFTC'), doc => {
       // change url thats being displayed
       const config = doc.data()
-      // console.log(config)
 
       if (config?.currentPage === path) {
         router.push(`${path}`)
       }
+    })
+  }
+
+  // listen to change controls
+  const listenToChangeControls = (handler: Function) => {
+    onSnapshot(doc(db, 'config', 'YnfWtqVDB8vyURRmpFTC'), doc => {
+      // change url thats being displayed
+      const config = doc.data()
+
+      handler(config)
     })
   }
 
@@ -113,5 +122,6 @@ export default () => {
     listenToChangePage,
     updateConfig,
     getPhotoById,
+    listenToChangeControls,
   }
 }
