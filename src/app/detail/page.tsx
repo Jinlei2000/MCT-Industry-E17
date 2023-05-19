@@ -1,10 +1,8 @@
 'use client'
 import useFireStore from '@/hooks/useFireStore'
-import { useRouter } from 'next/navigation'
 
 export default () => {
   const { listenToChangePage } = useFireStore()
-  const router = useRouter()
 
   listenToChangePage('/')
 

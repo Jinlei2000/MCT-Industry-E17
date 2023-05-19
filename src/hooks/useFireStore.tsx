@@ -5,13 +5,14 @@ import {
   collection,
   getDocs,
   doc,
-  setDoc,
   onSnapshot,
+  updateDoc,
 } from 'firebase/firestore'
 import { useRouter } from 'next/navigation'
 
 export default () => {
   const router = useRouter()
+  // FIREBASE CONFIG
   const firebaseConfig = {
     apiKey: process.env.NEXT_PUBLIC_apiKey,
     authDomain: process.env.NEXT_PUBLIC_authDomain,
@@ -21,7 +22,9 @@ export default () => {
     appId: process.env.NEXT_PUBLIC_appId,
   }
 
+  // FIREBASE INIT
   const app = initializeApp(firebaseConfig)
+  // FIRESTORE INIT
   const db = getFirestore(app)
 
   // CONFIG COLLECTION
@@ -36,22 +39,20 @@ export default () => {
     return config
   }
 
-  // update the current page in the config
-  const updateCurrentPage = async (page: string) => {
-    const config: IConfig = await getConfig()
-    config.currentPage = page
-    await setDoc(doc(db, 'config', 'YnfWtqVDB8vyURRmpFTC'), config)
-  }
+  // update config
+  const updateConfig = async (config: IConfig) => {
+    let newConfig: IConfig = {}
 
-  // update the current page in the config
-  const updatePhotoId = async (photoId: string) => {
-    const config: IConfig = await getConfig()
-    config.photoId = photoId
-    await setDoc(doc(db, 'config', 'YnfWtqVDB8vyURRmpFTC'), config)
+    // get the current config
+    await getConfig().then(oldConfig => {
+      newConfig = { ...oldConfig, ...config }
+    })
+   
+    updateDoc(doc(db, 'config', 'YnfWtqVDB8vyURRmpFTC'), newConfig as any)
   }
 
   // PHOTOS COLLECTION
-  // get all photos from the database
+  // get all photos
   const setRandomPhotoIdByType = async (picsType: string) => {
     const querySnapshot = await getDocs(collection(db, picsType))
     const photosId: string[] = []
@@ -61,9 +62,11 @@ export default () => {
 
     const randomIndex = Math.floor(Math.random() * photosId.length)
 
-    await updatePhotoId(photosId[randomIndex])
-    updateCurrentPage('/detail')
+    await updateConfig({ photoId: photosId[randomIndex], currentPage: '/detail', photoType: picsType })
   }
+
+  // get photo by id
+  const getPhotoById = async () => {}
 
   // LISTENERS
   // listen to the config
@@ -71,7 +74,7 @@ export default () => {
     onSnapshot(doc(db, 'config', 'YnfWtqVDB8vyURRmpFTC'), doc => {
       // change url thats being displayed
       const config = doc.data()
-      console.log(config)
+      // console.log(config)
 
       if (config?.currentPage === path) {
         router.push(`${path}`)
@@ -81,9 +84,10 @@ export default () => {
 
   return {
     getConfig,
-    updateCurrentPage,
-    updatePhotoId,
+    // updateCurrentPage,
+    // updatePhotoId,
     setRandomPhotoIdByType,
     listenToChangePage,
+    updateConfig,
   }
 }

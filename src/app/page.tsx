@@ -5,6 +5,7 @@ export default function Home() {
   const { listenToChangePage } = useFireStore()
 
   listenToChangePage('/detail')
+ 
 
   return (
     <main className="flex h-screen flex-col items-center justify-center">
