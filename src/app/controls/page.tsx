@@ -8,11 +8,13 @@ export default () => {
   const {
     updateConfig,
     setRandomPhotoIdByType,
+    getConfig,
     getPhotoById,
-    listenToChangeControls,
+    listenToChangeConfig,
   } = useFireStore()
 
   const [photo, setPhoto] = useState<IPhoto>({})
+  const [config, setConfig] = useState<IConfig>({})
   const [controls, setControls] = useState<any>({
     showType: true,
     showTags: false,
@@ -21,8 +23,7 @@ export default () => {
   })
 
   useEffect(() => {
-    listenToChangeControls((config: IConfig) => {
-      // change controls based on config
+    listenToChangeConfig((config: IConfig) => {
       setControls({
         showType: config?.currentPage === '/',
         showTags:
@@ -35,13 +36,19 @@ export default () => {
 
   useEffect(() => {
     getPhotoById().then(photo => {
-      console.log(photo)
+      // console.log(photo)
       setPhoto(photo)
+    })
+
+    getConfig().then(config => {
+      // console.log(config)
+      setConfig(config)
     })
   }, [controls])
 
   return (
     <main className="">
+      {/* go back button */}
       {controls.showBack && (
         <button
           className="absolute left-0 top-0 rounded bg-blue-500 px-4 py-2 text-lg font-medium text-white hover:bg-blue-600"
@@ -57,7 +64,6 @@ export default () => {
           Ga terug
         </button>
       )}
-      {/* center in middle of screen */}
       <div className="flex h-screen flex-col items-center justify-center">
         <h1 className="mb-8 text-4xl font-bold">Controls</h1>
 
@@ -105,10 +111,22 @@ export default () => {
         {/* show random & orignal */}
         {controls.showSelectedTag && (
           <div>
-            <button className="rounded bg-blue-500 px-4 py-2 text-lg font-medium text-white hover:bg-blue-600">
+            <button
+              className="rounded bg-blue-500 px-4 py-2 text-lg font-medium text-white hover:bg-blue-600"
+              onClick={() => {
+                config.photoType && setRandomPhotoIdByType(config.photoType)
+              }}
+            >
               Random
             </button>
-            <button className="rounded bg-blue-500 px-4 py-2 text-lg font-medium text-white hover:bg-blue-600">
+            <button
+              className="rounded bg-blue-500 px-4 py-2 text-lg font-medium text-white hover:bg-blue-600"
+              onClick={() => {
+                updateConfig({
+                  selectedTag: '',
+                })
+              }}
+            >
               Origineel
             </button>
           </div>

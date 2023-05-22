@@ -54,7 +54,7 @@ export default () => {
   }
 
   // PHOTOS COLLECTION
-  // get all photos
+  // get random photo id by type
   const setRandomPhotoIdByType = async (picsType: string) => {
     const querySnapshot = await getDocs(collection(db, picsType))
     const photosId: string[] = []
@@ -68,6 +68,7 @@ export default () => {
       photoId: photosId[randomIndex],
       currentPage: '/detail',
       photoType: picsType,
+      selectedTag: '',
     })
   }
 
@@ -116,6 +117,22 @@ export default () => {
     })
   }
 
+  // listen to change config (what to display on the page & controls)
+  const listenToChangeConfig = (handler: Function, goToPath?: string) => {
+    onSnapshot(doc(db, 'config', 'YnfWtqVDB8vyURRmpFTC'), doc => {
+      // change url thats being displayed
+      const newConfig = doc.data()
+
+      // go to the page if not undefined
+      if (newConfig?.currentPage === goToPath && goToPath) {
+        router.push(`${goToPath}`)
+      }
+
+      // call handler if not undefined
+      handler && handler(newConfig)
+    })
+  }
+
   return {
     getConfig,
     setRandomPhotoIdByType,
@@ -123,5 +140,6 @@ export default () => {
     updateConfig,
     getPhotoById,
     listenToChangeControls,
+    listenToChangeConfig,
   }
 }
