@@ -2,8 +2,6 @@
 import useFireStore from '@/hooks/useFireStore'
 import IConfig from '@/interfaces/IConfig'
 import IPhoto from '@/interfaces/IPhoto'
-import { onSnapshot, doc } from 'firebase/firestore'
-import router from 'next/router'
 import { useEffect, useState } from 'react'
 
 export default () => {
@@ -16,18 +14,21 @@ export default () => {
 
   const [photo, setPhoto] = useState<IPhoto>({})
   const [controls, setControls] = useState<any>({
-    back: false,
-    type: true,
-    tags: false,
+    showType: true,
+    showTags: false,
+    showBack: false,
+    showSelectedTag: false,
   })
 
   useEffect(() => {
     listenToChangeControls((config: IConfig) => {
       // change controls based on config
       setControls({
-        type: config?.currentPage === '/',
-        tags: config?.currentPage === '/detail' && config?.selectedTag === '',
-        back: config?.currentPage === '/detail',
+        showType: config?.currentPage === '/',
+        showTags:
+          config?.currentPage === '/detail' && config?.selectedTag === '',
+        showBack: config?.currentPage === '/detail',
+        showSelectedTag: config?.selectedTag != '',
       })
     })
   }, [])
@@ -41,7 +42,7 @@ export default () => {
 
   return (
     <main className="">
-      {controls.back && (
+      {controls.showBack && (
         <button
           className="absolute left-0 top-0 rounded bg-blue-500 px-4 py-2 text-lg font-medium text-white hover:bg-blue-600"
           onClick={() => {
@@ -59,7 +60,9 @@ export default () => {
       {/* center in middle of screen */}
       <div className="flex h-screen flex-col items-center justify-center">
         <h1 className="mb-8 text-4xl font-bold">Controls</h1>
-        {controls.type && (
+
+        {/* show type buttons */}
+        {controls.showType && (
           <div>
             <button
               className="rounded bg-blue-500 px-4 py-2 text-lg font-medium text-white hover:bg-blue-600"
@@ -81,16 +84,33 @@ export default () => {
         )}
 
         {/* show tags buttons */}
-        {photo.tags && (
+        {controls.showTags && (
           <div>
             {photo.tags?.map(tag => (
               <button
                 key={tag}
                 className="m-2 rounded bg-blue-500 px-4 py-2 text-lg font-medium text-white hover:bg-blue-600"
+                onClick={() => {
+                  updateConfig({
+                    selectedTag: tag,
+                  })
+                }}
               >
                 {tag}
               </button>
             ))}
+          </div>
+        )}
+
+        {/* show random & orignal */}
+        {controls.showSelectedTag && (
+          <div>
+            <button className="rounded bg-blue-500 px-4 py-2 text-lg font-medium text-white hover:bg-blue-600">
+              Random
+            </button>
+            <button className="rounded bg-blue-500 px-4 py-2 text-lg font-medium text-white hover:bg-blue-600">
+              Origineel
+            </button>
           </div>
         )}
       </div>

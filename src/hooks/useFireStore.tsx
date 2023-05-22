@@ -94,7 +94,7 @@ export default () => {
   }
 
   // LISTENERS
-  // listen to change page
+  // listen to change page (when to change homepage to detailpage and vice versa)
   const listenToChangePage = (path: string) => {
     onSnapshot(doc(db, 'config', 'YnfWtqVDB8vyURRmpFTC'), doc => {
       // change url thats being displayed
@@ -106,7 +106,7 @@ export default () => {
     })
   }
 
-  // listen to change controls
+  // listen to change controls (which buttons to show)
   const listenToChangeControls = (handler: Function) => {
     onSnapshot(doc(db, 'config', 'YnfWtqVDB8vyURRmpFTC'), doc => {
       // change url thats being displayed
