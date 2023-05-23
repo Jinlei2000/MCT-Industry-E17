@@ -11,21 +11,18 @@ export default () => {
   const [generatedPics, setGeneratedPics] = useState<string[]>([])
 
   // set 4 pics randomly of a tag from generatedPics
-  const randomPics = () => {
-    if (config.selectedTag !== '') {
-      let randomPics: string[] = []
-      const tag = config.selectedTag
-
-      const images =
-        tag && photo.generatedPics && photo.generatedPics[tag]
-          ? photo.generatedPics[tag]
-          : []
+  const randomPics = (generatedPics: any) => {
+    let randomPics: string[] = []
+    const tag = config.selectedTag
+    if (tag && tag !== '') {
+      const images = generatedPics[tag] ? generatedPics[tag] : []
 
       if (images.length > 4) {
         randomPics = images.sort(() => 0.5 - Math.random()).slice(0, 4)
       } else {
         randomPics = images
       }
+
       setGeneratedPics(randomPics)
     }
   }
@@ -41,7 +38,7 @@ export default () => {
       setPhoto(photo)
 
       // set 4 pics randomly of a tag from generatedPics when more than 4 pics
-      randomPics()
+      randomPics(photo.generatedPics)
     })
   }, [config])
 
