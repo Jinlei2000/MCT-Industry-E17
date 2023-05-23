@@ -141,6 +141,5 @@ export default () => {
     getPhotoById,
     listenToChangeControls,
     listenToChangeConfig,
-    
   }
 }
