@@ -1,10 +1,13 @@
 'use client'
 import useFireStore from '@/hooks/useFireStore'
+import { useEffect } from 'react'
 
 export default function Home() {
-  const { listenToChangePage } = useFireStore()
+  const { listenToChangeConfig } = useFireStore()
 
-  listenToChangePage('/detail')
+  useEffect(() => {
+    listenToChangeConfig(() => {}, '/detail')
+  }, [])
 
   return (
     <main className="flex h-screen flex-col items-center justify-center">
