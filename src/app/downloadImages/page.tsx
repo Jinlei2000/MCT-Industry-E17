@@ -31,8 +31,6 @@ export default () => {
             getDownloadURL(storageRef).then(url => {
               console.log(url)
               // saveAs(url)
-
-              
               // download with url
               const xhr = new XMLHttpRequest()
               xhr.responseType = 'blob'
