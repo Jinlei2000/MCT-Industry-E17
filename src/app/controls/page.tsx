@@ -2,6 +2,7 @@
 import useFireStore from '@/hooks/useFireStore'
 import IConfig from '@/interfaces/IConfig'
 import IPhoto from '@/interfaces/IPhoto'
+import { QRCodeCanvas, QRCodeSVG } from 'qrcode.react'
 import { useEffect, useState } from 'react'
 
 export default () => {
@@ -51,7 +52,7 @@ export default () => {
       {/* go back button */}
       {controls.showBack && (
         <button
-          className="absolute left-0 top-0 rounded bg-blue-500 px-4 py-2 text-lg font-medium text-white hover:bg-blue-600"
+          className="absolute left-4 top-4 rounded bg-blue-500 px-4 py-2 text-lg font-medium text-white hover:bg-blue-600"
           onClick={() => {
             updateConfig({
               currentPage: '/',
@@ -129,6 +130,15 @@ export default () => {
             >
               Origineel
             </button>
+
+            <div className="absolute bottom-4 right-4">
+              <QRCodeSVG
+                id="qrCode"
+                value={`${window.location.host}/download`}
+                bgColor={'transparent'}
+                level={'L'}
+              />
+            </div>
           </div>
         )}
       </div>
