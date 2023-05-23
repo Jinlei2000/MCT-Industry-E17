@@ -51,6 +51,7 @@ export default () => {
               console.log(url)
               // saveAs(url)
 
+              
               // download with url
               const xhr = new XMLHttpRequest()
               xhr.responseType = 'blob'
