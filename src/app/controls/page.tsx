@@ -15,6 +15,7 @@ export default () => {
   } = useFireStore()
 
   const [photo, setPhoto] = useState<IPhoto>({})
+  const [QRCodeUrl, setQRCodeUrl] = useState<string>('')
   const [config, setConfig] = useState<IConfig>({})
   const [controls, setControls] = useState<any>({
     showType: true,
@@ -33,6 +34,14 @@ export default () => {
         showSelectedTag: config?.selectedTag != '',
       })
     })
+
+    if (window.location.host === 'localhost:3000') {
+      console.log('localhost:3000/downloadImages')
+      setQRCodeUrl(`${window.location.host}/downloadImages`)
+    } else {
+      console.log(`https://${window.location.host}/downloadImages`)
+      setQRCodeUrl(`https://${window.location.host}/downloadImages`)
+    }
   }, [])
 
   useEffect(() => {
@@ -134,7 +143,8 @@ export default () => {
             <div className="absolute bottom-4 right-4">
               <QRCodeSVG
                 id="qrCode"
-                value={`${window.location.host}/downloadImages`}
+                // value={`https://${window.location.host}/downloadImages`}
+                value={QRCodeUrl}
                 bgColor={'transparent'}
                 level={'L'}
               />
