@@ -2,7 +2,7 @@
 import useFireStore from '@/hooks/useFireStore'
 import IConfig from '@/interfaces/IConfig'
 import IPhoto from '@/interfaces/IPhoto'
-import { QRCodeCanvas, QRCodeSVG } from 'qrcode.react'
+import { QRCodeSVG } from 'qrcode.react'
 import { useEffect, useState } from 'react'
 
 export default () => {
