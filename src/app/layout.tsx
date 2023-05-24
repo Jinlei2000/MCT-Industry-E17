@@ -44,7 +44,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="nl" className={`${proximanova.variable} font-proxima`}>
-      <body>{children}</body>
+      <body>{children}</body>      
     </html>
   )
 }
