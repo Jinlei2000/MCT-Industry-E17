@@ -1,4 +1,36 @@
 import '../assets/globals.css'
+import localFont from '@next/font/local'
+
+const proximanova = localFont({
+  src: [
+    {
+      path: '../../public/fonts/Fontspring-DEMO-proximanova-black.ttf',
+      weight: '700'
+    },
+    {
+      path: '../../public/fonts/Fontspring-DEMO-proximanova-bold.ttf',
+      weight: '500'
+    },
+    {
+      path: '../../public/fonts/Fontspring-DEMO-proximanova-extrabold.ttf',
+      weight: '600'
+    },
+    {
+      path: '../../public/fonts/Fontspring-DEMO-proximanova-medium.ttf',
+      weight: '300'
+    },
+    {
+      path: '../../public/fonts/Fontspring-DEMO-proximanova-regular.ttf',
+      weight: '200'
+    },
+    {
+      path: '../../public/fonts/Fontspring-DEMO-proximanova-semibold.ttf',
+      weight: '400'
+    }
+  ],
+  variable: '--font-proxima-nova'
+})
+
 
 export const metadata = {
   title: 'E17 Expo',
@@ -11,7 +43,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="nl">
+    <html lang="nl" className={`${proximanova.variable} font-proxima`}>
       <body>{children}</body>
     </html>
   )
