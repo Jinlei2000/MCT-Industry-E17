@@ -134,7 +134,7 @@ export default () => {
             <div className="absolute bottom-4 right-4">
               <QRCodeSVG
                 id="qrCode"
-                value={`${window.location.host}/download`}
+                value={`${window.location.host}/downloadImages`}
                 bgColor={'transparent'}
                 level={'L'}
               />
