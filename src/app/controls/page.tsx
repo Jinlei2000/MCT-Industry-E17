@@ -2,7 +2,7 @@
 import useFireStore from '@/hooks/useFireStore'
 import IConfig from '@/interfaces/IConfig'
 import IPhoto from '@/interfaces/IPhoto'
-import { QRCodeCanvas, QRCodeSVG } from 'qrcode.react'
+import { QRCodeSVG } from 'qrcode.react'
 import { useEffect, useState } from 'react'
 
 export default () => {
@@ -134,7 +134,7 @@ export default () => {
             <div className="absolute bottom-4 right-4">
               <QRCodeSVG
                 id="qrCode"
-                value={`${window.location.host}/download`}
+                value={`${window.location.host}/downloadImages`}
                 bgColor={'transparent'}
                 level={'L'}
               />
