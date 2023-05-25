@@ -5,6 +5,10 @@ module.exports = {
     extend: {
       fontFamily: {
         proxima : ['var(--font-proxima-nova)', 'sans-serif'],
+      },
+      colors: {
+        'e17-primary': {200: "#2BB673", },
+        'e17-secondary': {700: "#204794", },
       }
     },
   },
