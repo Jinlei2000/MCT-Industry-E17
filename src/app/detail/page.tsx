@@ -46,12 +46,17 @@ export default () => {
   return (
     <main className="flex h-screen flex-col items-center justify-center">
       <SideBar title="Originele foto" />
-      <div className="fixed bottom-0 left-0 m-12 max-w-md border-2 border-white/100 bg-black/40 p-2 ">
-        <div className="font text-3xl text-white opacity-100">
-          De Europese weg 17 is ongeveer 696 kilometer lang.
+      {true ? (
+        <div className="fixed bottom-0 left-0 m-12 max-w-md border-2 border-white/100 bg-black/40 p-2 ">
+          <div className="font text-3xl text-white opacity-100">
+            De Europese weg 17 is ongeveer 696 kilometer lang.
+          </div>
         </div>
-      </div>
-      {false ? (
+      ) : (
+        <div></div>
+      )}
+      
+      {true ? (
         // show original photo
 
         <img
@@ -61,28 +66,30 @@ export default () => {
         />
       ) : (
         // show 4 pics randomly of a tag from generatedPics
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-          <img
-            className="object-cover"
-            src="https://firebasestorage.googleapis.com/v0/b/firestore-fa445.appspot.com/o/1%2F1.jpg?alt=media&token=e864deff-cde2-4c32-a42d-cbbfa6850b64"
-            alt={`AI generated photo of `}
-          />
-          <img
-            className="object-cover"
-            src="https://firebasestorage.googleapis.com/v0/b/firestore-fa445.appspot.com/o/1%2F1-2_UT.jpg?alt=media&token=c991ef61-9b1b-4fac-8534-c19e170c9333"
-            alt={`AI generated photo of `}
-          />
-          <img
-            className="object-cover"
-            src="https://firebasestorage.googleapis.com/v0/b/firestore-fa445.appspot.com/o/1%2F1-3_UT.jpg?alt=media&token=987987fd-43f0-4d68-a7a8-7ae35f909215"
-            alt={`AI generated photo of `}
-          />
-          <img
-            className="object-cover"
-            src="https://firebasestorage.googleapis.com/v0/b/firestore-fa445.appspot.com/o/1%2F1-4_UT.jpg?alt=media&token=59d86c04-e35f-4624-8ed0-b4044de32e41"
-            alt={`AI generated photo of `}
-          />
-        </div>
+          <div className="grid grid-cols-2 w-5/6 h-screen overflow-hidden self-stretch">
+            <img
+              className="object-cover"
+              src="https://firebasestorage.googleapis.com/v0/b/firestore-fa445.appspot.com/o/1%2F1.jpg?alt=media&token=e864deff-cde2-4c32-a42d-cbbfa6850b64"
+              alt={`AI generated photo of `}
+            />
+            <img
+              className="object-cover"
+              src="https://firebasestorage.googleapis.com/v0/b/firestore-fa445.appspot.com/o/1%2F1-2_UT.jpg?alt=media&token=c991ef61-9b1b-4fac-8534-c19e170c9333"
+              alt={`AI generated photo of `}
+            />
+            <img
+              className="object-cover"
+              src="https://firebasestorage.googleapis.com/v0/b/firestore-fa445.appspot.com/o/1%2F1-3_UT.jpg?alt=media&token=987987fd-43f0-4d68-a7a8-7ae35f909215"
+              alt={`AI generated photo of `}
+            />
+            <img
+              className="object-cover"
+              src="https://firebasestorage.googleapis.com/v0/b/firestore-fa445.appspot.com/o/1%2F1-4_UT.jpg?alt=media&token=59d86c04-e35f-4624-8ed0-b4044de32e41"
+              alt={`AI generated photo of `}
+            />
+            
+          </div>
+
       )}
     </main>
   )
