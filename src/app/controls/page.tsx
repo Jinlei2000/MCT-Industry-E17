@@ -1,4 +1,5 @@
 'use client'
+import Button from '@/components/Button'
 import useFireStore from '@/hooks/useFireStore'
 import IConfig from '@/interfaces/IConfig'
 import IPhoto from '@/interfaces/IPhoto'
@@ -60,19 +61,15 @@ export default () => {
     <main className="">
       {/* go back button */}
       {controls.showBack && (
-        <button
-          className="absolute left-4 top-4 rounded bg-blue-500 px-4 py-2 text-lg font-medium text-white hover:bg-blue-600"
-          onClick={() => {
-            updateConfig({
-              currentPage: '/',
-              photoId: '',
-              photoType: '',
-              selectedTag: '',
-            })
-          }}
-        >
-          Ga terug
-        </button>
+        <Button title="Ga terug" handleClick={() => {
+          updateConfig({
+            currentPage: '/',
+            photoId: '',
+            photoType: '',
+            selectedTag: '',
+          })
+        }} />
+        
       )}
       <div className="flex h-screen flex-col items-center justify-center">
         <h1 className="mb-8 text-4xl font-bold">Controls</h1>
@@ -80,14 +77,17 @@ export default () => {
         {/* show type buttons */}
         {controls.showType && (
           <div>
-            <button
+            {/* <button
               className="rounded bg-blue-500 px-4 py-2 text-lg font-medium text-white hover:bg-blue-600"
               onClick={() => {
                 setRandomPhotoIdByType('skyPics')
               }}
             >
               Lucht
-            </button>
+            </button> */}
+            <Button title="Lucht" handleClick={() => {
+              setRandomPhotoIdByType('skyPics')
+            }} />
             <button
               className="rounded bg-blue-500 px-4 py-2 text-lg font-medium text-white hover:bg-blue-600"
               onClick={() => {
