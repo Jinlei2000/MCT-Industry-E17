@@ -1,4 +1,5 @@
 'use client'
+import SideBar from '@/components/SideBar'
 import useFireStore from '@/hooks/useFireStore'
 import IConfig from '@/interfaces/IConfig'
 import IPhoto from '@/interfaces/IPhoto'
@@ -43,13 +44,26 @@ export default () => {
   }, [config])
 
   return (
-    <main className="flex h-screen flex-col items-center justify-center p-10">
-      {config?.selectedTag === '' ? (
+    <main className="flex h-screen flex-col items-center justify-center">
+      <SideBar title="Originele foto" />
+
+      {config.selectedTag === '' ? (
         // show original photo
-        <img className="object-cover" src={photo.url} alt={'Original photo'} />
+        <>
+          <img
+            className="h-screen w-screen"
+            src={photo.url}
+            alt={'Original photo'}
+          />
+          <div className="fixed bottom-0 left-0 m-12 max-w-md border-2 border-white/100 bg-black/40 p-2 ">
+            <div className="font text-3xl text-white opacity-100">
+              De Europese weg 17 is ongeveer 696 kilometer lang.
+            </div>
+          </div>
+        </>
       ) : (
         // show 4 pics randomly of a tag from generatedPics
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+        <div className="grid h-screen w-5/6 grid-cols-2 self-stretch overflow-hidden">
           <img
             className="object-cover"
             src={generatedPics[0]}
