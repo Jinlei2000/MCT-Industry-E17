@@ -4,11 +4,11 @@ import useFireStore from '@/hooks/useFireStore'
 import { useEffect } from 'react'
 
 export default function Home() {
-  // const { listenToChangeConfig } = useFireStore()
+  const { listenToChangeConfig } = useFireStore()
 
-  // useEffect(() => {
-  //   listenToChangeConfig(() => {}, '/detail')
-  // }, [])
+  useEffect(() => {
+    listenToChangeConfig(() => {}, '/detail')
+  }, [])
 
   return (
     <main className="relative overflow-hidden">
