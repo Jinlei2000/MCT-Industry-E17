@@ -5,7 +5,6 @@ import { saveAs } from 'file-saver'
 import JSZip from 'jszip'
 import { useEffect, useState } from 'react'
 import IPhoto from '@/interfaces/IPhoto'
-import Image from 'next/image'
 
 export default () => {
   const { getPhotoById, getConfig } = useFireStore()
