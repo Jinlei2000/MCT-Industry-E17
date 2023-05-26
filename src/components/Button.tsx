@@ -1,7 +1,7 @@
 export default ({ title, handleClick }: { title: string, handleClick: () => void}) => {
     return (
         <button
-          className="absolute left-4 top-4 rounded bg-blue-500 px-4 py-2 text-lg font-medium text-white hover:bg-blue-600"
+          className="bg-transparent border-4 border-white mx-8 my-4 px-6 py-4 text-3xl font-extralight text-white "
           onClick={handleClick}
         >
           {title}
