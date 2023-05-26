@@ -6,6 +6,7 @@ import IPhoto from '@/interfaces/IPhoto'
 import { QRCodeSVG } from 'qrcode.react'
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
+import { ArrowLeft } from 'lucide-react'
 
 export default () => {
   const {
@@ -140,13 +141,12 @@ export default () => {
                 </g>
               </svg>
             </div>
-
-            {/* go back button */}
-            {controls.showBack && (
-              <div className=" flex-col place-items-center items-start justify-center">
-                <Button
-                  title="Ga terug"
-                  handleClick={() => {
+            <div className="flex place-items-center ">
+              {/* go back button */}
+              {controls.showBack && (
+                <button
+                  className="m-8 bg-transparent"
+                  onClick={() => {
                     updateConfig({
                       currentPage: '/',
                       photoId: '',
@@ -154,86 +154,108 @@ export default () => {
                       selectedTag: '',
                     })
                   }}
+                >
+                  <ArrowLeft
+                    strokeWidth={2.5}
+                    size={48}
+                    color="white"
+                  ></ArrowLeft>
+                </button>
+              )}
+              <div className="m-4">
+                <Image
+                  src="/logo-blauw.png"
+                  alt="logo leiedal"
+                  width={80}
+                  height={80}
                 />
               </div>
-            )}
-            <div className="absolute grid grid-cols-2 top-0 z-10 h-screen flex-col justify-center">
-              <div className="col-span-2 place-self-center text-5xl text-white">
-                Kies een fotostijl
+              <div className="m-4">
+                <Image
+                  src="/logo-howest.png"
+                  alt="logo leiedal"
+                  width={80}
+                  height={80}
+                />
               </div>
-              <div className=''>
-                {/* show type buttons */}
-                {controls.showType && (
-                  <div className="">
-                    <Button
-                      title="Lucht"
-                      handleClick={() => {
-                        setRandomPhotoIdByType('skyPics')
-                      }}
-                    />
-                    <Button
-                      title="Grond"
-                      handleClick={() => {
-                        setRandomPhotoIdByType('groundPics')
-                      }}
-                    />
-                  </div>
-                )}
-
-                {/* show tags buttons */}
-                {controls.showTags && (
-                  <div className=''>
-                    {photo.tags?.map(tag => (
+            </div>
+            <div className="relative top-20 h-1/2">
+              <div className="absolute top-0 z-10 grid  w-full grid-cols-2 grid-rows-3 flex-col justify-center">
+                <div className="col-span-2 place-self-center text-5xl text-white">
+                  Kies een fotostijl
+                </div>
+                <>
+                  {/* show type buttons */}
+                  {controls.showType && (
+                    <>
                       <Button
-                        title={tag}
+                        title="Lucht"
+                        handleClick={() => {
+                          setRandomPhotoIdByType('skyPics')
+                        }}
+                      />
+                      <Button
+                        title="Grond"
+                        handleClick={() => {
+                          setRandomPhotoIdByType('groundPics')
+                        }}
+                      />
+                    </>
+                  )}
+
+                  {/* show tags buttons */}
+                  {controls.showTags && (
+                    <>
+                      {photo.tags?.map(tag => (
+                        <Button
+                          title={tag}
+                          handleClick={() => {
+                            updateConfig({
+                              selectedTag: tag,
+                            })
+                          }}
+                        />
+                      ))}
+                    </>
+                  )}
+
+                  {/* show random & orignal */}
+                  {controls.showSelectedTag && (
+                    <>
+                      <Button
+                        title="Random"
+                        handleClick={() => {
+                          config.photoType &&
+                            setRandomPhotoIdByType(config.photoType)
+                        }}
+                      />
+                      <Button
+                        title="Origineel"
                         handleClick={() => {
                           updateConfig({
-                            selectedTag: tag,
+                            selectedTag: '',
                           })
                         }}
                       />
-                    ))}
-                  </div>
-                )}
-
-                {/* show random & orignal */}
-                {controls.showSelectedTag && (
-                  <div>
-                    <Button
-                      title="Random"
-                      handleClick={() => {
-                        config.photoType &&
-                          setRandomPhotoIdByType(config.photoType)
-                      }}
-                    />
-                    <Button
-                      title="Origineel"
-                      handleClick={() => {
-                        updateConfig({
-                          selectedTag: '',
-                        })
-                      }}
-                    />
-
-                    <div className="absolute bottom-4 right-4">
-                      <QRCodeSVG
-                        id="qrCode"
-                        // value={`https://${window.location.host}/downloadImages`}
-                        value={QRCodeUrl}
-                        bgColor={'white'}
-                        level={'L'}
-                      />
-                    </div>
-                  </div>
-                )}
+                    </>
+                  )}
+                </>
               </div>
             </div>
-            <Image
-              src="/logo-blauw.png"
-              alt="logo leiedal"
-              width={80}
-              height={80}
-            />
+            {controls.showSelectedTag && (
+              <div className="absolute border-8 border-white rounded bottom-4 right-4">
+                <QRCodeSVG
+                  id="qrCode"
+                  // value={`https://${window.location.host}/downloadImages`}
+                  value={QRCodeUrl}
+                  bgColor={'white'}
+                  level={'L'}
+                />
+              </div>
+            )}
+            <div className='text-white text-7xl p-4 mx-8 w-80 '>
+              <div className='text-stroke text-transparent'>EXPO</div>  50 JAAR E3/E17
+            </div>
           </div>
         </div>
       </aside>
