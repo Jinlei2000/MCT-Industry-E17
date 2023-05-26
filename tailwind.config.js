@@ -2,6 +2,7 @@
 module.exports = {
   content: ['./src/pages/**/*.{js,ts,jsx,tsx,mdx}', './src/components/**/*.{js,ts,jsx,tsx,mdx}', './src/app/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
+    
     extend: {
       fontFamily: {
         proxima : ['var(--font-proxima-nova)', 'sans-serif'],
@@ -9,7 +10,8 @@ module.exports = {
       colors: {
         'e17-primary': {200: "#2BB673", },
         'e17-secondary': {700: "#204794", },
-      }
+      },
+      
     },
   },
   plugins: [],
