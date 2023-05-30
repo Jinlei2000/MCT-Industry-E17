@@ -15,6 +15,7 @@ export default () => {
     getConfig,
     getPhotoById,
     listenToChangeConfig,
+    goToHomeAfterTime,
   } = useFireStore()
 
   const [photo, setPhoto] = useState<IPhoto>({})
@@ -57,6 +58,11 @@ export default () => {
       // console.log(config)
       setConfig(config)
     })
+
+    // go to home after 2 minutes if showSelectedTag is true
+    if (controls.showSelectedTag) {
+      goToHomeAfterTime(120)
+    }
   }, [controls])
 
   return (
@@ -226,9 +232,7 @@ export default () => {
                     {/* show random & orignal */}
                     {controls.showSelectedTag && (
                       <>
-                        <div className="col-span-2 place-self-center text-5xl text-white">
-                          
-                        </div>
+                        <div className="col-span-2 place-self-center text-5xl text-white"></div>
                         <Button
                           title="Random"
                           handleClick={() => {
