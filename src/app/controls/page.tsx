@@ -15,6 +15,7 @@ export default () => {
     getConfig,
     getPhotoById,
     listenToChangeConfig,
+    goToHomeAfterTime,
   } = useFireStore()
 
   const [photo, setPhoto] = useState<IPhoto>({})
@@ -57,6 +58,11 @@ export default () => {
       // console.log(config)
       setConfig(config)
     })
+
+    // go to home after 2 minutes if showSelectedTag is true
+    if (controls.showSelectedTag) {
+      goToHomeAfterTime(120)
+    }
   }, [controls])
 
   return (
@@ -69,7 +75,6 @@ export default () => {
       <aside className="relative z-20">
         <div className="fixed inset-y-0 left-0 h-screen w-20 rounded-br-3xl bg-e17-secondary-700">
           <div className="fixed  inset-y-0 right-0 h-screen w-1/2 bg-e17-primary-200 opacity-95">
-            {/* <div className='absolute flex items-center justify-center w-1/2'> */}
             <div className=" h-full flex-col place-items-center items-start justify-center">
               <div className="flex justify-center">
                 <svg
@@ -226,9 +231,7 @@ export default () => {
                     {/* show random & orignal */}
                     {controls.showSelectedTag && (
                       <>
-                        <div className="col-span-2 place-self-center text-5xl text-white">
-                          
-                        </div>
+                        <div className="col-span-2 place-self-center text-5xl text-white"></div>
                         <Button
                           title="Random"
                           handleClick={() => {
