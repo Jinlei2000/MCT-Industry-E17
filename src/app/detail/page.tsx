@@ -43,9 +43,19 @@ export default () => {
     })
   }, [config])
 
+  const customTitle = () => {
+    return (
+      <>
+        <div className="rotate-90 text-center text-4xl font-black text-white">
+          Origineel <span className="text-stroke">foto</span>
+        </div>
+      </>
+    )
+  }
+
   return (
     <main className="flex h-screen flex-col items-center justify-center">
-      <SideBar title="Originele foto" />
+      <SideBar title={customTitle} />
 
       {config.selectedTag === '' ? (
         // show original photo

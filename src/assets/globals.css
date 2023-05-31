@@ -3,7 +3,10 @@
 @tailwind utilities;
 
 @layer components {
+
+    /* Outline text */
     .text-stroke {
         -webkit-text-stroke: 1px white;
+        color: transparent;
     }
 }

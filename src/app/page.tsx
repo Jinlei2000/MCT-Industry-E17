@@ -10,6 +10,19 @@ export default function Home() {
     listenToChangeConfig(() => {}, '/detail')
   }, [])
 
+  const customTitle = () => {
+    return (
+      <>
+        <div className=" rotate-90 text-center text-4xl font-black leading-8 text-white">
+          <span className="text-stroke">EXPO </span> <br />
+          50 JAAR
+          <br />
+          E3/E17
+        </div>
+      </>
+    )
+  }
+
   return (
     <main className="relative overflow-hidden">
       {/* video */}
@@ -29,7 +42,7 @@ export default function Home() {
         <div className="w-2/6" />
       </div>
 
-      <SideBar title="EXPO 50 JAAR E3/E17" />
+      <SideBar title={customTitle} />
     </main>
   )
 }
