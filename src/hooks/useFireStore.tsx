@@ -53,6 +53,18 @@ export default () => {
     updateDoc(doc(db, 'config', 'YnfWtqVDB8vyURRmpFTC'), newConfig as any)
   }
 
+  // update config after given time
+  const goToHomeAfterTime = async (seconds: number) => {
+    setTimeout(() => {
+      updateConfig({
+        currentPage: '/',
+        photoId: '',
+        photoType: '',
+        selectedTag: '',
+      })
+    }, seconds * 1000)
+  }
+
   // PHOTOS COLLECTION
   // get random photo id by type
   const setRandomPhotoIdByType = async (picsType: string) => {
@@ -141,5 +153,6 @@ export default () => {
     getPhotoById,
     listenToChangeControls,
     listenToChangeConfig,
+    goToHomeAfterTime,
   }
 }

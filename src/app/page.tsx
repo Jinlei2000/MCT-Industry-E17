@@ -1,43 +1,34 @@
 'use client'
 import SideBar from '@/components/SideBar'
 import useFireStore from '@/hooks/useFireStore'
-import { useEffect, useRef } from 'react'
-import Youtube from 'react-youtube'
+import { useEffect } from 'react'
 
 export default function Home() {
   const { listenToChangeConfig } = useFireStore()
-  const videoRef = useRef(null)
-  const opts = {
-    
-    playerVars: {
-      autoplay: 1,
-    },
-  }
 
   useEffect(() => {
     listenToChangeConfig(() => {}, '/detail')
-    
-  
-  }, [videoRef])
+  }, [])
 
   return (
-    <main className="flex  h-screen flex-col items-center justify-end">
-      <div className='fixed w-screen h-screen z-0'>
-        <iframe
-        
-          src={"https://www.youtube.com/embed/Q3bMHbJLhCE?autoplay=1&loop=1&controls=0&mute=1&playlist=Q3bMHbJLhCE"}
-          allow="autoplay; loop; controls; mute;"
-          width={"100%"}
-          height={"100%"}
-          
-          allowFullScreen
-          
-        ></iframe>
+    <main className="relative overflow-hidden">
+      {/* video */}
+      <video
+        src="/video.mov"
+        autoPlay
+        muted
+        loop
+        id="E17 highway"
+        className="h-screen w-screen object-cover"
+      />
+
+      <div className="absolute bottom-0 left-0 z-10 flex w-screen justify-between bg-gradient-to-t from-black to-transparent">
+        <p className="py-8 pl-5 text-5xl font-bold text-white">
+          Kijk in de toekomst van de E17 via de tablet
+        </p>
+        <div className="w-2/6" />
       </div>
-      <div className='z-10 font-normal text-white text-4xl flex justify-center items-center w-screen h-48 bg-gradient-to-t from-black to-transparent'>
-        Kijk in de toekomst van de E17 via de tablet
-      </div>
-      
+
       <SideBar title="EXPO 50 JAAR E3/E17" />
     </main>
   )
