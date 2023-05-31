@@ -40,7 +40,6 @@ export default () => {
     })
 
     if (window.location.host === 'localhost:3000') {
-      console.log('localhost:3000/downloadImages')
       setQRCodeUrl(`${window.location.host}/downloadImages`)
     } else {
       console.log(`https://${window.location.host}/downloadImages`)
@@ -60,9 +59,18 @@ export default () => {
     })
 
     // go to home after 2 minutes if showSelectedTag is true
-    if (controls.showSelectedTag) {
-      goToHomeAfterTime(120)
-    }
+    // if (controls.showSelectedTag) {
+    //   goToHomeAfterTime(5)
+    // }
+
+    // const timer = setTimeout(() => {
+    //   updateConfig({
+    //     currentPage: '/',
+    //     photoId: '',
+    //     photoType: '',
+    //     selectedTag: '',
+    //   })
+    // }, 5000)
   }, [controls])
 
   return (
@@ -217,6 +225,7 @@ export default () => {
                         </div>
                         {photo.tags?.map(tag => (
                           <Button
+                            key={tag}
                             title={tag}
                             handleClick={() => {
                               updateConfig({
@@ -233,14 +242,14 @@ export default () => {
                       <>
                         <div className="col-span-2 place-self-center text-5xl text-white"></div>
                         <Button
-                          title="Random"
+                          title="Nieuwe foto"
                           handleClick={() => {
                             config.photoType &&
                               setRandomPhotoIdByType(config.photoType)
                           }}
                         />
                         <Button
-                          title="Origineel"
+                          title="Andere toekomst"
                           handleClick={() => {
                             updateConfig({
                               selectedTag: '',
@@ -256,7 +265,6 @@ export default () => {
                 <div className="absolute bottom-4 right-4 rounded border-8 border-white">
                   <QRCodeSVG
                     id="qrCode"
-                    // value={`https://${window.location.host}/downloadImages`}
                     value={QRCodeUrl}
                     bgColor={'white'}
                     level={'L'}
