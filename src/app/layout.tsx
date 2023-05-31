@@ -4,33 +4,32 @@ import localFont from '@next/font/local'
 const proximanova = localFont({
   src: [
     {
-      path: '../../public/fonts/Fontspring-DEMO-proximanova-black.ttf',
-      weight: '700'
+      path: '../../public/fonts/Proxima Nova Regular.otf',
+      weight: '400',
     },
     {
-      path: '../../public/fonts/Fontspring-DEMO-proximanova-bold.ttf',
-      weight: '500'
+      path: '../../public/fonts/Proxima Nova Medium.otf',
+      weight: '500',
     },
     {
-      path: '../../public/fonts/Fontspring-DEMO-proximanova-extrabold.ttf',
-      weight: '600'
+      path: '../../public/fonts/Proxima Nova Semibold.otf',
+      weight: '600',
     },
     {
-      path: '../../public/fonts/Fontspring-DEMO-proximanova-medium.ttf',
-      weight: '300'
+      path: '../../public/fonts/Proxima Nova Bold.otf',
+      weight: '700',
     },
     {
-      path: '../../public/fonts/Fontspring-DEMO-proximanova-regular.ttf',
-      weight: '200'
+      path: '../../public/fonts/Proxima Nova Extrabold.otf',
+      weight: '800',
     },
     {
-      path: '../../public/fonts/Fontspring-DEMO-proximanova-semibold.ttf',
-      weight: '400'
-    }
+      path: '../../public/fonts/Proxima Nova Black.otf',
+      weight: '900',
+    },
   ],
-  variable: '--font-proxima-nova'
+  variable: '--font-proxima-nova',
 })
-
 
 export const metadata = {
   title: 'E17 Expo',
@@ -44,7 +43,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="nl" className={`${proximanova.variable} font-proxima`}>
-      <body>{children}</body>      
+      <body>{children}</body>
     </html>
   )
 }
