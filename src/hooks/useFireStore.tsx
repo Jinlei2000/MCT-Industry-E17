@@ -66,7 +66,7 @@ export default () => {
   }
 
   // PHOTOS COLLECTION
-  // get random photo id by type
+  // set random photo id by type
   const setRandomPhotoIdByType = async (picsType: string) => {
     const querySnapshot = await getDocs(collection(db, picsType))
     const photosId: string[] = []
