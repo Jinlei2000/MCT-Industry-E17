@@ -70,27 +70,32 @@ export default () => {
     <main className="flex h-screen flex-col items-center justify-center">
       {config.selectedTag === '' ? (
         // show original photo
-
         <>
           <SideBar title={customTitle} />
 
           {isLoaded && (
+            // show loading screen when image is not loaded
             <div className="h-screen w-screen animate-pulse bg-gray-600" />
           )}
+
+          {/* show original photo */}
           <Image
             className="object-cover"
-            src={photo.url ? photo.url : '/'}
+            src={photo.url ? photo.url : ''}
             alt={'Original photo'}
             fill={true}
             quality={100}
             onLoadingComplete={() => setIsLoaded(false)}
           />
 
-          <div className="fixed bottom-0 left-0 m-12 max-w-md border-2 border-white/100 bg-black/40 p-2 ">
-            <div className="font text-3xl text-white opacity-100">
-              De Europese weg 17 is ongeveer 696 kilometer lang.
+          {!isLoaded && (
+            // show text when image is loaded
+            <div className="fixed bottom-0 left-0 m-12 max-w-md border-2 border-white/100 bg-black/40 p-2 ">
+              <div className="font text-3xl text-white opacity-100">
+                De Europese weg 17 is ongeveer 696 kilometer lang.
+              </div>
             </div>
-          </div>
+          )}
         </>
       ) : (
         // show 4 pics randomly of a tag from generatedPics
