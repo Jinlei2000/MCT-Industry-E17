@@ -50,7 +50,7 @@ export default () => {
       newConfig = { ...oldConfig, ...config }
     })
 
-    updateDoc(doc(db, 'config', 'YnfWtqVDB8vyURRmpFTC'), newConfig as any)
+    updateDoc(doc(db, 'config', 'XvCzxNlFVxfuVfVG1FwO'), newConfig as any)
   }
 
   // update config after given time
@@ -109,7 +109,7 @@ export default () => {
   // LISTENERS
   // listen to change page (when to change homepage to detailpage and vice versa)
   const listenToChangePage = (path: string) => {
-    onSnapshot(doc(db, 'config', 'YnfWtqVDB8vyURRmpFTC'), doc => {
+    onSnapshot(doc(db, 'config', 'XvCzxNlFVxfuVfVG1FwO'), doc => {
       // change url thats being displayed
       const config = doc.data()
 
@@ -121,7 +121,7 @@ export default () => {
 
   // listen to change controls (which buttons to show)
   const listenToChangeControls = (handler: Function) => {
-    onSnapshot(doc(db, 'config', 'YnfWtqVDB8vyURRmpFTC'), doc => {
+    onSnapshot(doc(db, 'config', 'XvCzxNlFVxfuVfVG1FwO'), doc => {
       // change url thats being displayed
       const config = doc.data()
 
@@ -131,7 +131,7 @@ export default () => {
 
   // listen to change config (what to display on the page & controls)
   const listenToChangeConfig = (handler: Function, goToPath?: string) => {
-    onSnapshot(doc(db, 'config', 'YnfWtqVDB8vyURRmpFTC'), doc => {
+    onSnapshot(doc(db, 'config', 'XvCzxNlFVxfuVfVG1FwO'), doc => {
       // change url thats being displayed
       const newConfig = doc.data()
 
