@@ -125,7 +125,7 @@ export default () => {
                     <Image
                       key={`${index}-image`}
                       className="object-cover"
-                      src={picUrl}
+                      src={`${picUrl}`}
                       alt={`AI generated photo of ${config.selectedTag}`}
                       fill={true}
                       quality={100}
