@@ -1,5 +1,6 @@
 'use client'
 import SideBar from '@/components/SideBar'
+import ImgSkeleton from '@/components/imgSkeleton'
 import useFireStore from '@/hooks/useFireStore'
 import IConfig from '@/interfaces/IConfig'
 import IPhoto from '@/interfaces/IPhoto'
@@ -64,32 +65,35 @@ export default () => {
     )
   }
 
-  const [isLoaded, setIsLoaded] = useState(true)
+  const [isLoadedImg, setIsLoadedImg] = useState(true)
+  const [isLoadedAiImgs, setIsLoadedAiImgs] = useState([true, true, true, true])
 
   return (
-    <main className="flex h-screen flex-col items-center justify-center">
+    <main className="relative h-screen">
+      {/* original photo or ai generated photos */}
       {config.selectedTag === '' ? (
-        // show original photo
         <>
           <SideBar title={customTitle} />
 
-          {isLoaded && (
-            // show loading screen when image is not loaded
-            <div className="h-screen w-screen animate-pulse bg-gray-600" />
+          {/* skeleton loader */}
+          {isLoadedImg && (
+            <ImgSkeleton className="absolute z-[2] h-full w-5/6" />
           )}
 
           {/* show original photo */}
-          <Image
-            className="object-cover"
-            src={photo.url ? photo.url : ''}
-            alt={'Original photo'}
-            fill={true}
-            quality={100}
-            onLoadingComplete={() => setIsLoaded(false)}
-          />
+          {photo.url && (
+            <Image
+              className="object-cover"
+              src={photo.url}
+              alt={'Original photo'}
+              fill
+              quality={100}
+              onLoadingComplete={() => setIsLoadedImg(false)}
+            />
+          )}
 
-          {!isLoaded && (
-            // show text when image is loaded
+          {/* show description */}
+          {!isLoadedImg && (
             <div className="fixed bottom-0 left-0 m-12 max-w-md border-2 border-white/100 bg-black/40 p-2 ">
               <div className="font text-3xl text-white opacity-100">
                 De Europese weg 17 is ongeveer 696 kilometer lang.
@@ -98,31 +102,46 @@ export default () => {
           )}
         </>
       ) : (
-        // show 4 pics randomly of a tag from generatedPics
         <>
           <SideBar title={AiTitle} />
-          <div className="grid h-screen w-5/6 grid-cols-2 self-stretch overflow-hidden">
-            <img
-              className="object-cover"
-              src={generatedPics[0]}
-              alt={`AI generated photo of ${config.selectedTag}`}
-            />
-            <img
-              className="object-cover"
-              src={generatedPics[1]}
-              alt={`AI generated photo of ${config.selectedTag}`}
-            />
-            <img
-              className="object-cover"
-              src={generatedPics[2]}
-              alt={`AI generated photo of ${config.selectedTag}`}
-            />
-            <img
-              className="object-cover"
-              src={generatedPics[3]}
-              alt={`AI generated photo of ${config.selectedTag}`}
-            />
+
+          {/* skeleton loader */}
+          <div className="absolute z-[2] h-screen w-5/6">
+            <div className="grid h-full grid-cols-2 grid-rows-2">
+              {isLoadedAiImgs.map((isLoadedAiImg, index) => (
+                <div key={index}>
+                  {isLoadedAiImg && <ImgSkeleton className="h-full w-full" />}
+                </div>
+              ))}
+            </div>
           </div>
+
+          {/* show 4 pics randomly of a tag from generated ai pics */}
+          {generatedPics.length > 0 && (
+            <div className="h-screen w-5/6">
+              <div className="grid h-full grid-cols-2 grid-rows-2">
+                {generatedPics.map((picUrl, index) => (
+                  <div key={index} className="relative">
+                    <Image
+                      key={`${index}-image`}
+                      className="object-cover"
+                      src={`${picUrl}`}
+                      alt={`AI generated photo of ${config.selectedTag}`}
+                      fill={true}
+                      quality={100}
+                      onLoadingComplete={() => {
+                        setIsLoadedAiImgs(prev => {
+                          const newIsLoadedAiImgs = [...prev]
+                          newIsLoadedAiImgs[index] = false
+                          return newIsLoadedAiImgs
+                        })
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </>
       )}
     </main>
