@@ -1,6 +1,7 @@
 'use client'
 import SideBar from '@/components/SideBar'
 import ImgSkeleton from '@/components/imgSkeleton'
+
 import useFireStore from '@/hooks/useFireStore'
 import IConfig from '@/interfaces/IConfig'
 import IPhoto from '@/interfaces/IPhoto'
