@@ -7,7 +7,7 @@ export default function Home() {
   const { listenToChangeConfig } = useFireStore()
 
   useEffect(() => {
-    listenToChangeConfig(() => {}, '/detail')
+    listenToChangeConfig(() => {}, '/original')
   }, [])
 
   const customTitle = () => {

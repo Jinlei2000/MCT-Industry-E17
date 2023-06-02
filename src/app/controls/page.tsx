@@ -15,7 +15,6 @@ export default () => {
     getConfig,
     getPhotoById,
     listenToChangeConfig,
-    goToHomeAfterTime,
   } = useFireStore()
 
   const [photo, setPhoto] = useState<IPhoto>({})
@@ -33,11 +32,12 @@ export default () => {
       setControls({
         showType: config?.currentPage === '/',
         showTags:
-          config?.currentPage === '/detail' && config?.selectedTag === '',
-        showBack: config?.currentPage === '/detail',
-        showSelectedTag: config?.selectedTag != '',
+          config?.currentPage === '/original' && config?.selectedTag === '',
+        showBack: config?.currentPage !== '/',
+        showSelectedTag:
+          config?.selectedTag != '' && config?.currentPage === '/detail',
       })
-    })
+    }, false)
 
     if (window.location.host === 'localhost:3000') {
       setQRCodeUrl(`${window.location.host}/downloadImages`)
@@ -230,6 +230,7 @@ export default () => {
                             handleClick={() => {
                               updateConfig({
                                 selectedTag: tag,
+                                currentPage: '/detail',
                               })
                             }}
                           />
@@ -253,6 +254,7 @@ export default () => {
                           handleClick={() => {
                             updateConfig({
                               selectedTag: '',
+                              currentPage: '/original',
                             })
                           }}
                         />
