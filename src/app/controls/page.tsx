@@ -7,6 +7,7 @@ import { QRCodeSVG } from 'qrcode.react'
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { ArrowLeft } from 'lucide-react'
+import useHostUrl from '@/hooks/useHostUrl'
 
 export default () => {
   const {
@@ -16,9 +17,9 @@ export default () => {
     getPhotoById,
     listenToChangeConfig,
   } = useFireStore()
+  const { getURL } = useHostUrl()
 
   const [photo, setPhoto] = useState<IPhoto>({})
-  const [QRCodeUrl, setQRCodeUrl] = useState<string>('')
   const [config, setConfig] = useState<IConfig>({})
   const [controls, setControls] = useState<any>({
     showType: true,
@@ -38,13 +39,6 @@ export default () => {
           config?.selectedTag != '' && config?.currentPage === '/detail',
       })
     }, false)
-
-    if (window.location.host === 'localhost:3000') {
-      setQRCodeUrl(`${window.location.host}/downloadImages`)
-    } else {
-      console.log(`https://${window.location.host}/downloadImages`)
-      setQRCodeUrl(`https://${window.location.host}/downloadImages`)
-    }
   }, [])
 
   useEffect(() => {
@@ -169,11 +163,7 @@ export default () => {
                       })
                     }}
                   >
-                    <ArrowLeft
-                      strokeWidth={2.5}
-                      size={48}
-                      color="white"
-                    ></ArrowLeft>
+                    <ArrowLeft strokeWidth={2.5} size={48} color="white" />
                   </button>
                 )}
                 <div className="m-4">
@@ -265,12 +255,19 @@ export default () => {
               </div>
               {controls.showSelectedTag && (
                 <div className="absolute bottom-4 right-4 rounded border-8 border-white">
-                  <QRCodeSVG
-                    id="qrCode"
-                    value={QRCodeUrl}
-                    bgColor={'white'}
-                    level={'L'}
-                  />
+                  <button onClick={() => {
+                    // go to download page url
+                    console.log(getURL('/downloadImages'))
+                    window.location.href = getURL('/downloadImages')
+                    
+                  }}>
+                    <QRCodeSVG
+                      id="qrCode"
+                      value={getURL('/downloadImages')}
+                      bgColor={'white'}
+                      level={'L'}
+                    />
+                  </button>
                 </div>
               )}
               <div className="mx-8 w-80 p-4 text-7xl text-white ">
