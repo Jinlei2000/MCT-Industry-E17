@@ -63,7 +63,7 @@ export default () => {
       {/* controls */}
       <aside className="fixed right-0 w-7/12">
         {/* action buttons */}
-        <div className="absolute right-0 h-screen w-10/12 bg-e17-primary-200 px-10 opacity-95 xl:px-16">
+        <div className="absolute right-0 flex h-screen w-10/12 flex-col justify-between bg-e17-primary-200 px-10 pb-8 opacity-95 xl:px-16 xl:pb-12">
           <header className="flex w-full items-start justify-between">
             <div className="flex items-center gap-4 pt-8 xl:gap-6 xl:pt-12">
               {/* go back button */}
@@ -215,8 +215,8 @@ export default () => {
             </svg>
           </header>
 
-          <footer className="flex items-center justify-between">
-            <p className="text-5xl font-black text-white">
+          <footer className="flex items-end justify-between">
+            <p className="text-5xl font-black text-white xl:text-7xl">
               <span className="text-stroke">EXPO </span> <br />
               50 JAAR
               <br />
@@ -224,12 +224,13 @@ export default () => {
             </p>
             {/* qr code */}
             {controls.showSelectedTag && (
-              <div className="">
+              <div>
                 <QRCodeSVG
                   id="qrCode"
                   value={getURL('/downloadImages')}
                   bgColor={'white'}
                   level={'L'}
+                  className="h-24 w-24 bg-white p-2 xl:h-40 xl:w-40 xl:p-4"
                 />
               </div>
             )}
