@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { ArrowLeft } from 'lucide-react'
 import useHostUrl from '@/hooks/useHostUrl'
+import ImageSkeleton from '@/components/ImageSkeleton'
 
 export default () => {
   const {
@@ -20,6 +21,7 @@ export default () => {
 
   const [photo, setPhoto] = useState<IPhoto>({})
   const [config, setConfig] = useState<IConfig>({})
+  const [isLoaded, setIsLoaded] = useState(true)
   const [controls, setControls] = useState<any>({
     showType: true,
     showTags: false,
@@ -51,6 +53,13 @@ export default () => {
 
   return (
     <main>
+      {/* loading bg image */}
+      {isLoaded && (
+        <div className="absolute left-0 top-0 z-10 h-screen w-screen bg-gray-400">
+          <ImageSkeleton className="h-full w-6/12" border={false} />
+        </div>
+      )}
+
       {/* background image */}
       <Image
         className="h-screen w-screen object-cover"
@@ -58,10 +67,11 @@ export default () => {
         alt="Hong Kong Traffic View"
         fill={true}
         quality={100}
+        onLoadingComplete={() => setIsLoaded(false)}
       />
 
       {/* controls */}
-      <aside className="fixed right-0 w-7/12">
+      <aside className="fixed right-0 z-20 w-7/12">
         {/* action buttons */}
         <div className="absolute right-0 flex h-screen w-10/12 flex-col justify-between bg-e17-primary-200 px-10 pb-8 opacity-95 xl:px-16 xl:pb-12">
           <header className="flex w-full items-start justify-between">
@@ -307,7 +317,7 @@ export default () => {
       </aside>
 
       {/* blue background */}
-      <div className="fixed left-0 w-1/3">
+      <div className="fixed left-0 z-20 w-1/3">
         <div className="h-screen w-2/12 rounded-br-[100px] bg-e17-secondary-700" />
       </div>
     </main>
