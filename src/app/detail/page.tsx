@@ -1,6 +1,6 @@
 'use client'
+import ImgSkeleton from '@/components/ImgSkeleton'
 import SideBar from '@/components/SideBar'
-import ImgSkeleton from '@/components/imgSkeleton'
 import useFireStore from '@/hooks/useFireStore'
 import IConfig from '@/interfaces/IConfig'
 import IPhoto from '@/interfaces/IPhoto'
@@ -8,8 +8,7 @@ import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
 export default () => {
-  const { getPhotoById, listenToChangeConfig } = useFireStore()
-  const [photo, setPhoto] = useState<IPhoto>({})
+  const { getPhotoById, listenToChangeConfig, autoGoBackTimer } = useFireStore()
   const [config, setConfig] = useState<IConfig>({})
   const [generatedPics, setGeneratedPics] = useState<string[]>([])
   const [isLoadedAiImgs, setIsLoadedAiImgs] = useState([true, true, true, true])
@@ -38,12 +37,13 @@ export default () => {
   }, [])
 
   useEffect(() => {
-    getPhotoById().then(photo => {
-      setPhoto(photo)
-
+    getPhotoById().then((photo: IPhoto) => {
       // set 4 pics randomly of a tag from generatedPics when more than 4 pics
       randomPics(photo.generatedPics)
     })
+
+    // auto go back to home page after time
+    autoGoBackTimer(config, '/detail')
   }, [config])
 
   const customTitle = () => {
@@ -57,51 +57,44 @@ export default () => {
   }
 
   return (
-    <main className="relative h-screen">
-      {/* original photo or ai generated photos */}
-      {config.selectedTag !== '' && (
-        <>
-          <SideBar title={customTitle} />
+    <>
+      <SideBar title={customTitle} />
 
-          {/* skeleton loader */}
-          <div className="absolute z-[2] h-screen w-5/6">
-            <div className="grid h-full grid-cols-2 grid-rows-2">
-              {isLoadedAiImgs.map((isLoadedAiImg, index) => (
-                <div key={index}>
-                  {isLoadedAiImg && <ImgSkeleton className="h-full w-full" />}
-                </div>
-              ))}
+      {/* skeleton loader */}
+      <div className="absolute z-[2] h-screen w-5/6">
+        <div className="grid h-full grid-cols-2 grid-rows-2">
+          {isLoadedAiImgs.map((isLoadedAiImg, index) => (
+            <div key={index}>
+              {isLoadedAiImg && <ImgSkeleton className="h-full w-full" />}
             </div>
-          </div>
+          ))}
+        </div>
+      </div>
 
-          {/* show 4 pics randomly of a tag from generated ai pics */}
-          {generatedPics.length > 0 && (
-            <div className="h-screen w-5/6">
-              <div className="grid h-full grid-cols-2 grid-rows-2">
-                {generatedPics.map((picUrl, index) => (
-                  <div key={index} className="relative">
-                    <Image
-                      key={`${index}-image`}
-                      className="object-cover"
-                      src={`${picUrl}`}
-                      alt={`AI generated photo of ${config.selectedTag}`}
-                      fill={true}
-                      quality={100}
-                      onLoadingComplete={() => {
-                        setIsLoadedAiImgs(prev => {
-                          const newIsLoadedAiImgs = [...prev]
-                          newIsLoadedAiImgs[index] = false
-                          return newIsLoadedAiImgs
-                        })
-                      }}
-                    />
-                  </div>
-                ))}
-              </div>
+      {/* show 4 pics randomly of a tag from generated ai pics */}
+      {generatedPics.length > 0 && (
+        <div className="grid h-screen w-5/6 grid-cols-2 grid-rows-2">
+          {generatedPics.map((picUrl, index) => (
+            <div key={index} className="relative">
+              <Image
+                key={`${index}-image`}
+                className="object-cover"
+                src={`${picUrl}`}
+                alt={`AI generated photo of ${config.selectedTag}`}
+                fill={true}
+                quality={100}
+                onLoadingComplete={() => {
+                  setIsLoadedAiImgs(prev => {
+                    const newIsLoadedAiImgs = [...prev]
+                    newIsLoadedAiImgs[index] = false
+                    return newIsLoadedAiImgs
+                  })
+                }}
+              />
             </div>
-          )}
-        </>
+          ))}
+        </div>
       )}
-    </main>
+    </>
   )
 }

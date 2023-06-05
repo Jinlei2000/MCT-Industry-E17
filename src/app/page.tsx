@@ -1,6 +1,6 @@
 'use client'
 import SideBar from '@/components/SideBar'
-import VideoSkeleton from '@/components/videoSkeleton'
+import VideoSkeleton from '@/components/VideoSkeleton'
 import useFireStore from '@/hooks/useFireStore'
 import { useEffect, useState } from 'react'
 
@@ -27,6 +27,8 @@ export default function Home() {
 
   return (
     <main className="relative overflow-hidden">
+      <SideBar title={customTitle} />
+
       {/* skeleton video */}
       {!isLoadedVideo && <VideoSkeleton className="h-screen w-5/6" />}
 
@@ -41,14 +43,12 @@ export default function Home() {
         onLoadedData={() => setIsLoadedVideo(true)}
       />
 
-      <div className="absolute bottom-0 left-0 z-10 flex w-screen justify-between bg-gradient-to-t from-black to-transparent">
+      <div className="absolute bottom-0 left-0 z-[1] flex w-screen justify-between bg-gradient-to-t from-black to-transparent">
         <p className="py-8 pl-5 text-5xl font-bold text-white">
           Kijk in de toekomst van de E17 via de tablet
         </p>
         <div className="w-2/6" />
       </div>
-
-      <SideBar title={customTitle} />
     </main>
   )
 }

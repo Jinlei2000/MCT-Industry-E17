@@ -51,20 +51,6 @@ export default () => {
       // console.log(config)
       setConfig(config)
     })
-
-    // go to home after 2 minutes if showSelectedTag is true
-    // if (controls.showSelectedTag) {
-    //   goToHomeAfterTime(5)
-    // }
-
-    // const timer = setTimeout(() => {
-    //   updateConfig({
-    //     currentPage: '/',
-    //     photoId: '',
-    //     photoType: '',
-    //     selectedTag: '',
-    //   })
-    // }, 5000)
   }, [controls])
 
   return (
@@ -255,19 +241,12 @@ export default () => {
               </div>
               {controls.showSelectedTag && (
                 <div className="absolute bottom-4 right-4 rounded border-8 border-white">
-                  <button onClick={() => {
-                    // go to download page url
-                    console.log(getURL('/downloadImages'))
-                    window.location.href = getURL('/downloadImages')
-                    
-                  }}>
-                    <QRCodeSVG
-                      id="qrCode"
-                      value={getURL('/downloadImages')}
-                      bgColor={'white'}
-                      level={'L'}
-                    />
-                  </button>
+                  <QRCodeSVG
+                    id="qrCode"
+                    value={getURL('/downloadImages')}
+                    bgColor={'white'}
+                    level={'L'}
+                  />
                 </div>
               )}
               <div className="mx-8 w-80 p-4 text-7xl text-white ">

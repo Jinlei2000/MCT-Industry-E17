@@ -11,6 +11,7 @@ import {
   getDoc,
 } from 'firebase/firestore'
 import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 
 export default () => {
   // firestore config key
@@ -25,6 +26,9 @@ export default () => {
     messagingSenderId: process.env.NEXT_PUBLIC_messagingSenderId,
     appId: process.env.NEXT_PUBLIC_appId,
   }
+
+  // auto go back timer time in ms (2min)
+  const GoBackTime = 120000
 
   // FIREBASE INIT
   const app = initializeApp(firebaseConfig)
@@ -53,18 +57,6 @@ export default () => {
     })
 
     updateDoc(doc(db, 'config', configId), newConfig as any)
-  }
-
-  // update config after given time
-  const goToHomeAfterTime = async (seconds: number) => {
-    setTimeout(() => {
-      updateConfig({
-        currentPage: '/',
-        photoId: '',
-        photoType: '',
-        selectedTag: '',
-      })
-    }, seconds * 1000)
   }
 
   // PHOTOS COLLECTION
@@ -115,10 +107,10 @@ export default () => {
     isChangePage: boolean = true,
   ) => {
     onSnapshot(doc(db, 'config', configId), doc => {
-      // change url thats being displayed
+      // config from database
       const newConfig = doc.data()
 
-      // go to the page
+      // go to the page if isChangePage is true
       if (isChangePage) {
         router.push(`${newConfig?.currentPage}`)
       }
@@ -128,12 +120,30 @@ export default () => {
     })
   }
 
+  const [timer, setTimer] = useState<NodeJS.Timeout>(setTimeout(() => {}, 0))
+  const autoGoBackTimer = async (config: IConfig, pagePath: string) => {
+    if (config && config.currentPage == pagePath) {
+      setTimer(
+        setTimeout(() => {
+          updateConfig({
+            currentPage: '/',
+            photoId: '',
+            photoType: '',
+            selectedTag: '',
+          })
+        }, GoBackTime),
+      )
+    } else {
+      clearTimeout(timer)
+    }
+  }
+
   return {
     getConfig,
     setRandomPhotoIdByType,
     updateConfig,
     getPhotoById,
     listenToChangeConfig,
-    goToHomeAfterTime,
+    autoGoBackTimer,
   }
 }

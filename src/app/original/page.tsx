@@ -1,7 +1,6 @@
 'use client'
+import ImgSkeleton from '@/components/ImgSkeleton'
 import SideBar from '@/components/SideBar'
-import ImgSkeleton from '@/components/imgSkeleton'
-
 import useFireStore from '@/hooks/useFireStore'
 import IConfig from '@/interfaces/IConfig'
 import IPhoto from '@/interfaces/IPhoto'
@@ -9,7 +8,7 @@ import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
 export default () => {
-  const { getPhotoById, listenToChangeConfig } = useFireStore()
+  const { getPhotoById, listenToChangeConfig, autoGoBackTimer } = useFireStore()
   const [photo, setPhoto] = useState<IPhoto>({})
   const [config, setConfig] = useState<IConfig>({})
   const [isLoadedImg, setIsLoadedImg] = useState(true)
@@ -24,6 +23,9 @@ export default () => {
     getPhotoById().then((photo: IPhoto) => {
       setPhoto(photo)
     })
+
+    // auto go back to home page after time
+    autoGoBackTimer(config, '/original')
   }, [config])
 
   const customTitle = () => {
