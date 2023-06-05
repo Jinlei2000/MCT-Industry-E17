@@ -215,6 +215,73 @@ export default () => {
             </svg>
           </header>
 
+          {/* buttons */}
+          <div className="">
+            {/* show type buttons */}
+            {controls.showType && (
+              <>
+                <div className="col-span-2 place-self-center text-5xl text-white">
+                  Kies een fotostijl
+                </div>
+                <Button
+                  title="Lucht"
+                  handleClick={() => {
+                    setRandomPhotoIdByType('skyPics')
+                  }}
+                />
+                <Button
+                  title="Grond"
+                  handleClick={() => {
+                    setRandomPhotoIdByType('groundPics')
+                  }}
+                />
+              </>
+            )}
+
+            {/* show tags buttons */}
+            {controls.showTags && (
+              <>
+                <div className="col-span-2 place-self-center text-5xl text-white">
+                  Welke toekomst kies jij?
+                </div>
+                {photo.tags?.map(tag => (
+                  <Button
+                    key={tag}
+                    title={tag}
+                    handleClick={() => {
+                      updateConfig({
+                        selectedTag: tag,
+                        currentPage: '/detail',
+                      })
+                    }}
+                  />
+                ))}
+              </>
+            )}
+
+            {/* show random & orignal */}
+            {controls.showSelectedTag && (
+              <>
+                <div className="col-span-2 place-self-center text-5xl text-white"></div>
+                <Button
+                  title="Nieuwe foto"
+                  handleClick={() => {
+                    config.photoType && setRandomPhotoIdByType(config.photoType)
+                  }}
+                />
+                <Button
+                  title="Andere toekomst"
+                  handleClick={() => {
+                    updateConfig({
+                      selectedTag: '',
+                      currentPage: '/original',
+                    })
+                  }}
+                />
+              </>
+            )}
+          </div>
+
           <footer className="flex items-end justify-between">
             <p className="text-5xl font-black text-white xl:text-7xl">
               <span className="text-stroke">EXPO </span> <br />
@@ -224,15 +291,13 @@ export default () => {
             </p>
             {/* qr code */}
             {controls.showSelectedTag && (
-              <div>
-                <QRCodeSVG
-                  id="qrCode"
-                  value={getURL('/downloadImages')}
-                  bgColor={'white'}
-                  level={'L'}
-                  className="h-24 w-24 bg-white p-2 xl:h-40 xl:w-40 xl:p-4"
-                />
-              </div>
+              <QRCodeSVG
+                id="qrCode"
+                value={getURL('/downloadImages')}
+                bgColor={'white'}
+                level={'L'}
+                className="h-24 w-24 bg-white p-2 xl:h-40 xl:w-40 xl:p-4"
+              />
             )}
           </footer>
         </div>
@@ -248,108 +313,3 @@ export default () => {
     </main>
   )
 }
-
-//  <div className="flex place-items-center ">
-//             {/* go back button */}
-//             {controls.showBack && (
-//               <button
-//                 className="m-8 bg-transparent"
-//                 onClick={() => {
-//                   updateConfig({
-//                     currentPage: '/',
-//                     photoId: '',
-//                     photoType: '',
-//                     selectedTag: '',
-//                   })
-//                 }}
-//               >
-//                 <ArrowLeft strokeWidth={2.5} size={48} color="white" />
-//               </button>
-//             )}
-//             <div className="m-4">
-//               <Image
-//                 src="/logo-blauw.png"
-//                 alt="logo leiedal"
-//                 width={80}
-//                 height={80}
-//               />
-//             </div>
-//             <div className="m-4">
-//               <Image
-//                 src="/logo-howest.png"
-//                 alt="logo leiedal"
-//                 width={80}
-//                 height={80}
-//               />
-//             </div>
-//           </div>
-//           <div className="">
-//             <div className="absolute top-0 z-10 grid flex-col justify-center w-full grid-cols-2 grid-rows-3">
-//               <>
-//                 {/* show type buttons */}
-//                 {controls.showType && (
-//                   <>
-//                     <div className="col-span-2 text-5xl text-white place-self-center">
-//                       Kies een fotostijl
-//                     </div>
-//                     <Button
-//                       title="Lucht"
-//                       handleClick={() => {
-//                         setRandomPhotoIdByType('skyPics')
-//                       }}
-//                     />
-//                     <Button
-//                       title="Grond"
-//                       handleClick={() => {
-//                         setRandomPhotoIdByType('groundPics')
-//                       }}
-//                     />
-//                   </>
-//                 )}
-
-//                 {/* show tags buttons */}
-//                 {controls.showTags && (
-//                   <>
-//                     <div className="col-span-2 text-5xl text-white place-self-center">
-//                       Welke toekomst kies jij?
-//                     </div>
-//                     {photo.tags?.map(tag => (
-//                       <Button
-//                         key={tag}
-//                         title={tag}
-//                         handleClick={() => {
-//                           updateConfig({
-//                             selectedTag: tag,
-//                             currentPage: '/detail',
-//                           })
-//                         }}
-//                       />
-//                     ))}
-//                   </>
-//                 )}
-
-//                 {/* show random & orignal */}
-//                 {controls.showSelectedTag && (
-//                   <>
-//                     <div className="col-span-2 text-5xl text-white place-self-center"></div>
-//                     <Button
-//                       title="Nieuwe foto"
-//                       handleClick={() => {
-//                         config.photoType &&
-//                           setRandomPhotoIdByType(config.photoType)
-//                       }}
-//                     />
-//                     <Button
-//                       title="Andere toekomst"
-//                       handleClick={() => {
-//                         updateConfig({
-//                           selectedTag: '',
-//                           currentPage: '/original',
-//                         })
-//                       }}
-//                     />
-//                   </>
-//                 )}
-//               </>
-//             </div>
-//           </div>
