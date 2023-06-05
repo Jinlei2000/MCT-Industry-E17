@@ -1,5 +1,4 @@
 'use client'
-import ImgSkeleton from '@/components/ImgSkeleton'
 import SideBar from '@/components/SideBar'
 import Test from '@/components/Test'
 import useFireStore from '@/hooks/useFireStore'
