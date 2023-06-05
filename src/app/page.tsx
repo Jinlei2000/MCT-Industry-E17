@@ -26,11 +26,11 @@ export default function Home() {
   }
 
   return (
-    <main className="relative overflow-hidden">
+    <main className="relative h-screen w-screen overflow-hidden">
       <SideBar title={customTitle} />
 
       {/* skeleton video */}
-      {!isLoadedVideo && <VideoSkeleton className="h-screen w-5/6" />}
+      {!isLoadedVideo && <VideoSkeleton className="h-full w-5/6" />}
 
       {/* video */}
       <video

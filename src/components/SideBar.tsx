@@ -3,7 +3,7 @@ export default ({ title: Title }: { title: React.FC }) => {
     <aside className="fixed inset-y-0 right-0 z-10 w-1/6 bg-e17-primary-200 opacity-95">
       <div className="flex h-full flex-col justify-between p-4 ">
         {/* 50 jaar E3/E17 Logo */}
-        <div className="mx-20 -mt-8">
+        <div className="w-1/2 -mt-8">
           <svg viewBox="0 0 153.925 239.241">
             <g transform="translate(-22.233 -38.836)" opacity="0.95">
               <path
