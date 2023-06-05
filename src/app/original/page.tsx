@@ -25,7 +25,7 @@ export default () => {
     })
 
     // auto go back to home page after time
-    autoGoBackTimer(config, '/original')
+    // autoGoBackTimer(config, '/original')
   }, [config])
 
   const customTitle = () => {
