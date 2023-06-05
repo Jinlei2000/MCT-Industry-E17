@@ -3,8 +3,8 @@ export default ({ title: Title }: { title: React.FC }) => {
     <aside className="fixed inset-y-0 right-0 z-10 w-1/6 bg-e17-primary-200 opacity-95">
       <div className="flex h-full flex-col justify-between p-4 ">
         {/* 50 jaar E3/E17 Logo */}
-        <div className="mx-20 -mt-8">
-          <svg viewBox="0 0 153.925 239.241">
+        <div className="flex justify-center">
+          <svg className="-mt-8 w-1/2" viewBox="0 0 153.925 239.241">
             <g transform="translate(-22.233 -38.836)" opacity="0.95">
               <path
                 d="M21.151,218.969V23.28c0-12.271,12.08-22.233,26.959-22.233H149.226c14.265,0,25.85,9.554,25.85,21.319v196.6c0,11.764-11.585,21.319-25.85,21.319H47c-14.265,0-25.85-9.554-25.85-21.319Z"
@@ -74,7 +74,7 @@ export default ({ title: Title }: { title: React.FC }) => {
         <Title />
 
         {/* Leiedal & MCT logo */}
-        <div className="mx-8 flex gap-8 justify-center">
+        <div className="mx-8 flex justify-center gap-8">
           {/* logo leiedal */}
           <svg viewBox="0 0 70.6 70.6" className="fill-e17-secondary-700">
             <path d="M66.49,4.11V66.49H4.11V4.11H66.49M70.6,0H0V70.6H70.6Z" />

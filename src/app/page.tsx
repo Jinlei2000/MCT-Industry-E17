@@ -15,22 +15,22 @@ export default function Home() {
   const customTitle = () => {
     return (
       <>
-        <div className="rotate-90 text-center text-5xl font-black text-white">
+        <p className="rotate-90 text-center text-5xl font-black text-white">
           <span className="text-stroke">EXPO </span> <br />
           50 JAAR
           <br />
           E3/E17
-        </div>
+        </p>
       </>
     )
   }
 
   return (
-    <main className="relative overflow-hidden">
+    <main className="relative h-screen w-screen overflow-hidden">
       <SideBar title={customTitle} />
 
       {/* skeleton video */}
-      {!isLoadedVideo && <VideoSkeleton className="h-screen w-5/6" />}
+      {!isLoadedVideo && <VideoSkeleton className="h-full w-5/6" />}
 
       {/* video */}
       <video
