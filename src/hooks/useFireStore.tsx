@@ -29,6 +29,7 @@ export default () => {
 
   // auto go back timer time in ms (2min)
   const GoBackTime = 120000
+  const [timer, setTimer] = useState<NodeJS.Timeout>(setTimeout(() => {}, 0))
 
   // FIREBASE INIT
   const app = initializeApp(firebaseConfig)
@@ -120,7 +121,7 @@ export default () => {
     })
   }
 
-  const [timer, setTimer] = useState<NodeJS.Timeout>(setTimeout(() => {}, 0))
+  // auto go back timer
   const autoGoBackTimer = async (config: IConfig, pagePath: string) => {
     if (config && config.currentPage == pagePath) {
       setTimer(
