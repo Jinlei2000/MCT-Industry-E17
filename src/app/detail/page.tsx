@@ -1,6 +1,6 @@
 'use client'
+import ImageSkeleton from '@/components/ImageSkeleton'
 import SideBar from '@/components/SideBar'
-import Test from '@/components/Test'
 import useFireStore from '@/hooks/useFireStore'
 import IConfig from '@/interfaces/IConfig'
 import IPhoto from '@/interfaces/IPhoto'
@@ -64,11 +64,8 @@ export default () => {
       <div className="absolute z-[2] h-screen w-5/6">
         <div className="grid h-full grid-cols-2 grid-rows-2">
           {isLoadedAiImgs.map((isLoadedAiImg, index) => (
-            // <div key={index}>
-            //   {isLoadedAiImg && <ImgSkeleton className="h-full w-full" />}
-            // </div>
             <div key={index}>
-              {isLoadedAiImg && <Test className="h-full w-full" />}
+              {isLoadedAiImg && <ImageSkeleton className="h-full w-full" />}
             </div>
           ))}
         </div>
