@@ -11,8 +11,11 @@ import {
   getDoc,
 } from 'firebase/firestore'
 import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 
 export default () => {
+  // firestore config key
+  const configId = 'XvCzxNlFVxfuVfVG1FwO'
   const router = useRouter()
   // FIREBASE CONFIG
   const firebaseConfig = {
@@ -23,6 +26,10 @@ export default () => {
     messagingSenderId: process.env.NEXT_PUBLIC_messagingSenderId,
     appId: process.env.NEXT_PUBLIC_appId,
   }
+
+  // auto go back timer time in ms (2min)
+  const GoBackTime = 120000
+  const [timer, setTimer] = useState<NodeJS.Timeout>(setTimeout(() => {}, 0))
 
   // FIREBASE INIT
   const app = initializeApp(firebaseConfig)
@@ -50,19 +57,7 @@ export default () => {
       newConfig = { ...oldConfig, ...config }
     })
 
-    updateDoc(doc(db, 'config', 'XvCzxNlFVxfuVfVG1FwO'), newConfig as any)
-  }
-
-  // update config after given time
-  const goToHomeAfterTime = async (seconds: number) => {
-    setTimeout(() => {
-      updateConfig({
-        currentPage: '/',
-        photoId: '',
-        photoType: '',
-        selectedTag: '',
-      })
-    }, seconds * 1000)
+    updateDoc(doc(db, 'config', configId), newConfig as any)
   }
 
   // PHOTOS COLLECTION
@@ -78,7 +73,7 @@ export default () => {
 
     await updateConfig({
       photoId: photosId[randomIndex],
-      currentPage: '/detail',
+      currentPage: '/original',
       photoType: picsType,
       selectedTag: '',
     })
@@ -107,37 +102,18 @@ export default () => {
   }
 
   // LISTENERS
-  // listen to change page (when to change homepage to detailpage and vice versa)
-  const listenToChangePage = (path: string) => {
-    onSnapshot(doc(db, 'config', 'XvCzxNlFVxfuVfVG1FwO'), doc => {
-      // change url thats being displayed
-      const config = doc.data()
-
-      if (config?.currentPage === path) {
-        router.push(`${path}`)
-      }
-    })
-  }
-
-  // listen to change controls (which buttons to show)
-  const listenToChangeControls = (handler: Function) => {
-    onSnapshot(doc(db, 'config', 'XvCzxNlFVxfuVfVG1FwO'), doc => {
-      // change url thats being displayed
-      const config = doc.data()
-
-      handler(config)
-    })
-  }
-
-  // listen to change config (what to display on the page & controls)
-  const listenToChangeConfig = (handler: Function, goToPath?: string) => {
-    onSnapshot(doc(db, 'config', 'XvCzxNlFVxfuVfVG1FwO'), doc => {
-      // change url thats being displayed
+  // listen to change config & call handler & change page
+  const listenToChangeConfig = (
+    handler: Function,
+    isChangePage: boolean = true,
+  ) => {
+    onSnapshot(doc(db, 'config', configId), doc => {
+      // config from database
       const newConfig = doc.data()
 
-      // go to the page if not undefined
-      if (newConfig?.currentPage === goToPath && goToPath) {
-        router.push(`${goToPath}`)
+      // go to the page if isChangePage is true
+      if (isChangePage) {
+        router.push(`${newConfig?.currentPage}`)
       }
 
       // call handler if not undefined
@@ -145,14 +121,30 @@ export default () => {
     })
   }
 
+  // auto go back timer
+  const autoGoBackTimer = async (config: IConfig, pagePath: string) => {
+    if (config && config.currentPage == pagePath) {
+      setTimer(
+        setTimeout(() => {
+          updateConfig({
+            currentPage: '/',
+            photoId: '',
+            photoType: '',
+            selectedTag: '',
+          })
+        }, GoBackTime),
+      )
+    } else {
+      clearTimeout(timer)
+    }
+  }
+
   return {
     getConfig,
     setRandomPhotoIdByType,
-    listenToChangePage,
     updateConfig,
     getPhotoById,
-    listenToChangeControls,
     listenToChangeConfig,
-    goToHomeAfterTime,
+    autoGoBackTimer,
   }
 }
