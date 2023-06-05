@@ -9,6 +9,7 @@ const nextConfig = {
         pathname: '/v0/b/jaar-e17-ai.appspot.com/o/**',
       },
     ],
+    formats: ['image/avif', 'image/webp'],
   },
 }
 
