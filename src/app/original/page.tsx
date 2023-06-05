@@ -14,9 +14,9 @@ export default () => {
   const [isLoadedImg, setIsLoadedImg] = useState(true)
 
   useEffect(() => {
-    listenToChangeConfig((config: IConfig) => {
-      setConfig(config)
-    })
+    // listenToChangeConfig((config: IConfig) => {
+    //   setConfig(config)
+    // })
   }, [])
 
   useEffect(() => {
@@ -25,7 +25,7 @@ export default () => {
     })
 
     // auto go back to home page after time
-    // autoGoBackTimer(config, '/original')
+    autoGoBackTimer(config, '/original')
   }, [config])
 
   const customTitle = () => {

@@ -31,9 +31,9 @@ export default () => {
   }
 
   useEffect(() => {
-    listenToChangeConfig((config: IConfig) => {
-      setConfig(config)
-    })
+    // listenToChangeConfig((config: IConfig) => {
+    //   setConfig(config)
+    // })
   }, [])
 
   useEffect(() => {
@@ -43,7 +43,7 @@ export default () => {
     })
 
     // auto go back to home page after time
-    // autoGoBackTimer(config, '/detail')
+    autoGoBackTimer(config, '/detail')
   }, [config])
 
   const customTitle = () => {
