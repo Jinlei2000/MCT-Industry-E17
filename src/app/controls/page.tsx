@@ -7,6 +7,7 @@ import { QRCodeSVG } from 'qrcode.react'
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { ArrowLeft } from 'lucide-react'
+import useHostUrl from '@/hooks/useHostUrl'
 
 export default () => {
   const {
@@ -15,11 +16,10 @@ export default () => {
     getConfig,
     getPhotoById,
     listenToChangeConfig,
-    goToHomeAfterTime,
   } = useFireStore()
+  const { getURL } = useHostUrl()
 
   const [photo, setPhoto] = useState<IPhoto>({})
-  const [QRCodeUrl, setQRCodeUrl] = useState<string>('')
   const [config, setConfig] = useState<IConfig>({})
   const [controls, setControls] = useState<any>({
     showType: true,
@@ -33,18 +33,12 @@ export default () => {
       setControls({
         showType: config?.currentPage === '/',
         showTags:
-          config?.currentPage === '/detail' && config?.selectedTag === '',
-        showBack: config?.currentPage === '/detail',
-        showSelectedTag: config?.selectedTag != '',
+          config?.currentPage === '/original' && config?.selectedTag === '',
+        showBack: config?.currentPage !== '/',
+        showSelectedTag:
+          config?.selectedTag != '' && config?.currentPage === '/detail',
       })
-    })
-
-    if (window.location.host === 'localhost:3000') {
-      setQRCodeUrl(`${window.location.host}/downloadImages`)
-    } else {
-      console.log(`https://${window.location.host}/downloadImages`)
-      setQRCodeUrl(`https://${window.location.host}/downloadImages`)
-    }
+    }, false)
   }, [])
 
   useEffect(() => {
@@ -57,20 +51,6 @@ export default () => {
       // console.log(config)
       setConfig(config)
     })
-
-    // go to home after 2 minutes if showSelectedTag is true
-    // if (controls.showSelectedTag) {
-    //   goToHomeAfterTime(5)
-    // }
-
-    // const timer = setTimeout(() => {
-    //   updateConfig({
-    //     currentPage: '/',
-    //     photoId: '',
-    //     photoType: '',
-    //     selectedTag: '',
-    //   })
-    // }, 5000)
   }, [controls])
 
   return (
@@ -169,11 +149,7 @@ export default () => {
                       })
                     }}
                   >
-                    <ArrowLeft
-                      strokeWidth={2.5}
-                      size={48}
-                      color="white"
-                    ></ArrowLeft>
+                    <ArrowLeft strokeWidth={2.5} size={48} color="white" />
                   </button>
                 )}
                 <div className="m-4">
@@ -230,6 +206,7 @@ export default () => {
                             handleClick={() => {
                               updateConfig({
                                 selectedTag: tag,
+                                currentPage: '/detail',
                               })
                             }}
                           />
@@ -253,6 +230,7 @@ export default () => {
                           handleClick={() => {
                             updateConfig({
                               selectedTag: '',
+                              currentPage: '/original',
                             })
                           }}
                         />
@@ -265,7 +243,7 @@ export default () => {
                 <div className="absolute bottom-4 right-4 rounded border-8 border-white">
                   <QRCodeSVG
                     id="qrCode"
-                    value={QRCodeUrl}
+                    value={getURL('/downloadImages')}
                     bgColor={'white'}
                     level={'L'}
                   />
