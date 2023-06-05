@@ -14,9 +14,9 @@ export default () => {
   const [isLoadedImg, setIsLoadedImg] = useState(true)
 
   useEffect(() => {
-    listenToChangeConfig((config: IConfig) => {
-      setConfig(config)
-    })
+    // listenToChangeConfig((config: IConfig) => {
+    //   setConfig(config)
+    // })
   }, [])
 
   useEffect(() => {

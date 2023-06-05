@@ -31,9 +31,9 @@ export default () => {
   }
 
   useEffect(() => {
-    listenToChangeConfig((config: IConfig) => {
-      setConfig(config)
-    })
+    // listenToChangeConfig((config: IConfig) => {
+    //   setConfig(config)
+    // })
   }, [])
 
   useEffect(() => {
