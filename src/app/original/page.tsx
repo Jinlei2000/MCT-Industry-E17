@@ -1,6 +1,6 @@
 'use client'
-import ImgSkeleton from '@/components/ImgSkeleton'
 import SideBar from '@/components/SideBar'
+import Test from '@/components/Test'
 import useFireStore from '@/hooks/useFireStore'
 import IConfig from '@/interfaces/IConfig'
 import IPhoto from '@/interfaces/IPhoto'
@@ -46,8 +46,11 @@ export default () => {
           <SideBar title={customTitle} />
 
           {/* skeleton loader */}
-          {isLoadedImg && (
+          {/* {isLoadedImg && (
             <ImgSkeleton className="absolute z-[2] h-full w-5/6" />
+          )} */}
+          {isLoadedImg && (
+            <Test className="absolute z-[2] h-full w-5/6" />
           )}
 
           {/* show original photo */}
