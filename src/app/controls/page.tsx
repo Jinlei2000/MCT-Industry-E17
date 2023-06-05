@@ -215,8 +215,24 @@ export default () => {
             </svg>
           </header>
 
-          <footer>
-            
+          <footer className="flex items-center justify-between">
+            <p className="text-5xl font-black text-white">
+              <span className="text-stroke">EXPO </span> <br />
+              50 JAAR
+              <br />
+              E3/E17
+            </p>
+            {/* qr code */}
+            {controls.showSelectedTag && (
+              <div className="">
+                <QRCodeSVG
+                  id="qrCode"
+                  value={getURL('/downloadImages')}
+                  bgColor={'white'}
+                  level={'L'}
+                />
+              </div>
+            )}
           </footer>
         </div>
 
@@ -335,18 +351,4 @@ export default () => {
 //                 )}
 //               </>
 //             </div>
-//           </div>
-//           {controls.showSelectedTag && (
-//             <div className="absolute border-8 border-white rounded bottom-4 right-4">
-//               <QRCodeSVG
-//                 id="qrCode"
-//                 value={getURL('/downloadImages')}
-//                 bgColor={'white'}
-//                 level={'L'}
-//               />
-//             </div>
-//           )}
-//           <div className="p-4 mx-8 text-white w-80 text-7xl ">
-//             <div className="text-transparent text-stroke">EXPO</div> 50 JAAR
-//             E3/E17
 //           </div>

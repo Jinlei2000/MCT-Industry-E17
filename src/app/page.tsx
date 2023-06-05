@@ -15,12 +15,12 @@ export default function Home() {
   const customTitle = () => {
     return (
       <>
-        <div className="rotate-90 text-center text-5xl font-black text-white">
+        <p className="rotate-90 text-center text-5xl font-black text-white">
           <span className="text-stroke">EXPO </span> <br />
           50 JAAR
           <br />
           E3/E17
-        </div>
+        </p>
       </>
     )
   }
