@@ -1,10 +1,16 @@
-export default ({ title, handleClick }: { title: string, handleClick: () => void}) => {
-    return (
-        <button
-          className="bg-transparent border-4 border-white w-80 mx-8 my-4 px-6 py-4 text-3xl font-extralight text-white "
-          onClick={handleClick}
-        >
-          {title}
-        </button>
-
-    )}
+export default ({
+  children,
+  handleClick,
+}: {
+  children: React.ReactNode
+  handleClick: () => void
+}) => {
+  return (
+    <button
+      className="h-20 w-40 bg-e17-secondary-700 text-2xl font-bold text-white xl:h-24 xl:w-48 xl:text-3xl"
+      onClick={handleClick}
+    >
+      {children}
+    </button>
+  )
+}

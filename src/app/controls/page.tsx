@@ -9,6 +9,7 @@ import Image from 'next/image'
 import { ArrowLeft } from 'lucide-react'
 import useHostUrl from '@/hooks/useHostUrl'
 import ImageSkeleton from '@/components/ImageSkeleton'
+import Title from '@/components/Title'
 
 export default () => {
   const {
@@ -230,41 +231,45 @@ export default () => {
             {/* show type buttons */}
             {controls.showType && (
               <>
-                <div className="col-span-2 place-self-center text-5xl text-white">
-                  Kies een fotostijl
+                <Title>Kies een perspectief</Title>
+                <div className="flex gap-4 xl:gap-6">
+                  <Button
+                    handleClick={() => {
+                      setRandomPhotoIdByType('skyPics')
+                    }}
+                  >
+                    vanuit <br />
+                    de lucht
+                  </Button>
+                  <Button
+                    handleClick={() => {
+                      setRandomPhotoIdByType('groundPics')
+                    }}
+                  >
+                    vanop
+                    <br />
+                    ooghoogte
+                  </Button>
                 </div>
-                <Button
-                  title="Lucht"
-                  handleClick={() => {
-                    setRandomPhotoIdByType('skyPics')
-                  }}
-                />
-                <Button
-                  title="Grond"
-                  handleClick={() => {
-                    setRandomPhotoIdByType('groundPics')
-                  }}
-                />
               </>
             )}
 
             {/* show tags buttons */}
             {controls.showTags && (
               <>
-                <div className="col-span-2 place-self-center text-5xl text-white">
-                  Welke toekomst kies jij?
-                </div>
+                <Title>Welke toekomst kies jij?</Title>
                 {photo.tags?.map(tag => (
                   <Button
                     key={tag}
-                    title={tag}
                     handleClick={() => {
                       updateConfig({
                         selectedTag: tag,
                         currentPage: '/detail',
                       })
                     }}
-                  />
+                  >
+                    {tag}
+                  </Button>
                 ))}
               </>
             )}
