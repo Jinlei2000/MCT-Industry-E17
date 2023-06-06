@@ -1,5 +1,6 @@
 import '../assets/globals.css'
 import localFont from '@next/font/local'
+import { Metadata } from 'next'
 
 const proximanova = localFont({
   src: [
@@ -31,7 +32,7 @@ const proximanova = localFont({
   variable: '--font-proxima-nova',
 })
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'E17 Expo',
   description: 'Dit jaar staan we stil bij de 50ste verjaardag van de E3/E17',
 }
