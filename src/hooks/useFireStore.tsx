@@ -148,6 +148,7 @@ export default () => {
             photoId: '',
             photoType: '',
             selectedTag: '',
+            description: '',
           })
         }, GoBackTime),
       )

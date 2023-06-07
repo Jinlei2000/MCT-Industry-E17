@@ -47,13 +47,16 @@ export default () => {
 
           {/* skeleton loader */}
           {isLoadedImg && (
-            <ImageSkeleton className="absolute z-[2] h-full w-5/6" />
+            <ImageSkeleton
+              border={false}
+              className="absolute z-[2] h-full w-5/6"
+            />
           )}
 
           {/* show original photo */}
           {photo.url && (
             <Image
-              className="object-cover"
+              className="object-cover "
               src={photo.url}
               alt={'Original photo'}
               fill
@@ -62,10 +65,10 @@ export default () => {
           )}
 
           {/* show description */}
-          {!isLoadedImg && (
-            <div className="fixed bottom-0 left-0 m-12 max-w-md border-2 border-white/100 bg-black/40 p-2 ">
-              <div className="font text-3xl text-white opacity-100">
-                De Europese weg 17 is ongeveer 696 kilometer lang.
+          {!isLoadedImg && config && config.description && (
+            <div className="fixed bottom-24 left-20 max-w-5xl">
+              <div className="text-shadow font-extrabold text-white xl:text-5xl">
+                {config.description}
               </div>
             </div>
           )}

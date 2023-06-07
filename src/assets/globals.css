@@ -9,4 +9,8 @@
         -webkit-text-stroke: 1px white;
         color: transparent;
     }
+
+    .text-shadow {
+        text-shadow: 0 5px 15px black;
+    }
 }
