@@ -89,6 +89,7 @@ export default () => {
                       photoId: '',
                       photoType: '',
                       selectedTag: '',
+                      description: '',
                     })
                   }}
                 >
@@ -97,7 +98,7 @@ export default () => {
               )}
               {/* logo leiedal */}
               <svg
-                className="h-16 w-16 fill-e17-secondary-700 xl:h-20 xl:w-h-20"
+                className="xl:w-h-20 h-16 w-16 fill-e17-secondary-700 xl:h-20"
                 viewBox="0 0 70.6 70.6"
               >
                 <path d="M66.49,4.11V66.49H4.11V4.11H66.49M70.6,0H0V70.6H70.6Z" />
@@ -111,7 +112,7 @@ export default () => {
               </svg>
               {/* logo mct */}
               <svg
-                className="h-16 w-16 fill-e17-secondary-700 xl:h-20 xl:w-h-20"
+                className="xl:w-h-20 h-16 w-16 fill-e17-secondary-700 xl:h-20"
                 viewBox="0 0 345.41 309.52"
               >
                 <path d="m193.18,124.8l-25.41,14.03-25.41-14.03v29.31l15.23,8.79c6.3,3.64,14.07,3.64,20.37,0l15.23-8.79v-29.31Z" />

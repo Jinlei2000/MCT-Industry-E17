@@ -61,7 +61,7 @@ export default () => {
   }
 
   // PHOTOS COLLECTION
-  // set random photo id by type
+  // set random photo id by type & add description
   const setRandomPhotoIdByType = async (picsType: string) => {
     const querySnapshot = await getDocs(collection(db, picsType))
     const photosId: string[] = []
@@ -71,11 +71,14 @@ export default () => {
 
     const randomIndex = Math.floor(Math.random() * photosId.length)
 
+    const description = await getRandomDescription()
+
     await updateConfig({
       photoId: photosId[randomIndex],
       currentPage: '/original',
       photoType: picsType,
       selectedTag: '',
+      description: description,
     })
   }
 
@@ -99,6 +102,20 @@ export default () => {
 
     // console.log(photo)
     return photo
+  }
+
+  // DESCRIPTIONS COLLECTION
+  // get random description
+  const getRandomDescription = async (): Promise<string> => {
+    const querySnapshot = await getDocs(collection(db, 'descriptions'))
+    const descriptions: string[] = []
+    querySnapshot.forEach(doc => {
+      descriptions.push(doc.data().text)
+    })
+
+    const randomIndex = Math.floor(Math.random() * descriptions.length)
+
+    return descriptions[randomIndex]
   }
 
   // LISTENERS
