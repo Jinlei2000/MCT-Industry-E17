@@ -41,10 +41,10 @@ export default function Home() {
         id="E17 highway"
         className="h-screen w-screen object-cover"
         onLoadedData={() => {
-          // set timer 2 sec and set false
+          // set timer 1 sec and set false
           setTimeout(() => {
             setIsLoadedVideo(true)
-          }, 2000)
+          }, 1000)
         }}
       />
 

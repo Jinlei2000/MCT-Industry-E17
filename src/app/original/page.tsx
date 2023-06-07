@@ -60,6 +60,7 @@ export default () => {
               src={photo.url}
               alt={'Original photo'}
               fill
+              priority
               onLoadingComplete={() => setIsLoadedImg(false)}
             />
           )}

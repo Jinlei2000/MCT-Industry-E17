@@ -66,7 +66,8 @@ export default () => {
         className="h-screen w-screen object-cover"
         src="/hong-kong-traffic-view.png"
         alt="Hong Kong Traffic View"
-        fill={true}
+        fill
+        priority
         onLoadingComplete={() => setIsLoaded(false)}
       />
 

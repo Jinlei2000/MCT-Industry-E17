@@ -81,7 +81,8 @@ export default () => {
                 className="object-cover"
                 src={`${picUrl}`}
                 alt={`AI generated photo of ${config.selectedTag}`}
-                fill={true}
+                fill
+                priority
                 onLoadingComplete={() => {
                   setIsLoadedAiImgs(prev => {
                     const newIsLoadedAiImgs = [...prev]

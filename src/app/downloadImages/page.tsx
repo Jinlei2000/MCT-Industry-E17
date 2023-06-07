@@ -84,6 +84,7 @@ export default () => {
         src="/hong-kong-traffic-view.png"
         alt="foto"
         fill
+        priority
       />
 
       <div className="absolute z-10 h-screen w-screen bg-e17-primary-200/95">
@@ -171,7 +172,7 @@ export default () => {
               Download
             </button>
           ) : (
-            <button className="h-20 w-44 flex justify-center items-center bg-e17-secondary-700 text-2xl font-bold text-white xl:h-24 xl:w-60 xl:text-3xl">
+            <button className="flex h-20 w-44 items-center justify-center bg-e17-secondary-700 text-2xl font-bold text-white xl:h-24 xl:w-60 xl:text-3xl">
               <svg
                 className="mr-2 h-8 w-8 animate-spin fill-blue-600 text-gray-200 "
                 viewBox="0 0 100 101"
