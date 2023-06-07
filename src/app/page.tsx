@@ -40,7 +40,12 @@ export default function Home() {
         loop
         id="E17 highway"
         className="h-screen w-screen object-cover"
-        onLoadedData={() => setIsLoadedVideo(true)}
+        onLoadedData={() => {
+          // set timer 2 sec and set false
+          setTimeout(() => {
+            setIsLoadedVideo(true)
+          }, 2000)
+        }}
       />
 
       <div className="absolute bottom-0 left-0 z-[1] flex h-1/6 w-screen justify-between bg-gradient-to-t from-[#545454] to-transparent">
