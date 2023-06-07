@@ -128,8 +128,11 @@ export default () => {
       // config from database
       const newConfig = doc.data()
 
+      const pathname = window.location.pathname
+      
+
       // go to the page if isChangePage is true
-      if (isChangePage) {
+      if (isChangePage && newConfig?.currentPage != pathname) {
         router.push(`${newConfig?.currentPage}`)
       }
 
