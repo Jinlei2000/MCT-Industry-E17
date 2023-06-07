@@ -67,14 +67,16 @@ export default () => {
         src="/hong-kong-traffic-view.png"
         alt="Hong Kong Traffic View"
         fill={true}
-        quality={100}
         onLoadingComplete={() => setIsLoaded(false)}
       />
 
-      {/* controls */}
+      {/* controls panel */}
       <aside className="fixed right-0 z-20 w-7/12">
+        {/* green background opacity 95% */}
+        <div className="absolute right-0 h-screen w-10/12 bg-e17-primary-200 opacity-95" />
+
         {/* action buttons */}
-        <div className="absolute right-0 flex h-screen w-10/12 flex-col justify-between bg-e17-primary-200 px-10 pb-8 opacity-95 xl:px-16 xl:pb-12">
+        <div className="absolute right-0 flex h-screen w-10/12 flex-col justify-between px-10 pb-4">
           <header className="flex w-full items-start justify-between">
             <div className="flex items-center gap-4 pt-8 xl:gap-6 xl:pt-12">
               {/* go back button */}
@@ -95,7 +97,7 @@ export default () => {
               )}
               {/* logo leiedal */}
               <svg
-                className="h-16 w-16 fill-e17-secondary-700 xl:h-32 xl:w-32"
+                className="h-16 w-16 fill-e17-secondary-700 xl:h-20 xl:w-h-20"
                 viewBox="0 0 70.6 70.6"
               >
                 <path d="M66.49,4.11V66.49H4.11V4.11H66.49M70.6,0H0V70.6H70.6Z" />
@@ -109,7 +111,7 @@ export default () => {
               </svg>
               {/* logo mct */}
               <svg
-                className="h-16 w-16 fill-e17-secondary-700 xl:h-32 xl:w-32"
+                className="h-16 w-16 fill-e17-secondary-700 xl:h-20 xl:w-h-20"
                 viewBox="0 0 345.41 309.52"
               >
                 <path d="m193.18,124.8l-25.41,14.03-25.41-14.03v29.31l15.23,8.79c6.3,3.64,14.07,3.64,20.37,0l15.23-8.79v-29.31Z" />
@@ -156,10 +158,7 @@ export default () => {
               </svg>
             </div>
             {/* 50 jaar E3/E17 Logo */}
-            <svg
-              className="-mt-4 w-28 xl:-mt-8 xl:w-48"
-              viewBox="0 0 160.984 246.221"
-            >
+            <svg className="-mt-4 w-28 xl:w-36" viewBox="0 0 160.984 246.221">
               <g transform="translate(-18.704 -38.836)" opacity="0.95">
                 <path
                   d="M21.151,225.327V23.929c0-12.629,12.634-22.882,28.2-22.882H155.1c14.919,0,27.036,9.833,27.036,21.941v202.34c0,12.108-12.116,21.941-27.036,21.941H48.186c-14.919,0-27.036-9.833-27.036-21.941Z"
@@ -232,13 +231,14 @@ export default () => {
             {controls.showType && (
               <>
                 <Title>Kies een perspectief</Title>
-                <div className="flex gap-4 xl:gap-6">
+                <div className="grid grid-cols-2 gap-4 xl:gap-6">
                   <Button
                     handleClick={() => {
                       setRandomPhotoIdByType('skyPics')
                     }}
                   >
-                    vanuit <br />
+                    vanuit
+                    <br />
                     de lucht
                   </Button>
                   <Button
@@ -258,47 +258,53 @@ export default () => {
             {controls.showTags && (
               <>
                 <Title>Welke toekomst kies jij?</Title>
-                {photo.tags?.map(tag => (
-                  <Button
-                    key={tag}
-                    handleClick={() => {
-                      updateConfig({
-                        selectedTag: tag,
-                        currentPage: '/detail',
-                      })
-                    }}
-                  >
-                    {tag}
-                  </Button>
-                ))}
+                <div className="grid grid-cols-2 gap-4 xl:gap-6">
+                  {photo.tags?.map(tag => (
+                    <Button
+                      key={tag}
+                      handleClick={() => {
+                        updateConfig({
+                          selectedTag: tag,
+                          currentPage: '/detail',
+                        })
+                      }}
+                    >
+                      {tag}
+                    </Button>
+                  ))}
+                </div>
               </>
             )}
 
             {/* show random & orignal */}
             {controls.showSelectedTag && (
               <>
-                <div className="col-span-2 place-self-center text-5xl text-white"></div>
-                <Button
-                  title="Nieuwe foto"
-                  handleClick={() => {
-                    config.photoType && setRandomPhotoIdByType(config.photoType)
-                  }}
-                />
-                <Button
-                  title="Andere toekomst"
-                  handleClick={() => {
-                    updateConfig({
-                      selectedTag: '',
-                      currentPage: '/original',
-                    })
-                  }}
-                />
+                <div className="grid grid-cols-2 gap-4 xl:gap-6">
+                  <Button
+                    handleClick={() => {
+                      config.photoType &&
+                        setRandomPhotoIdByType(config.photoType)
+                    }}
+                  >
+                    Nieuwe foto
+                  </Button>
+                  <Button
+                    handleClick={() => {
+                      updateConfig({
+                        selectedTag: '',
+                        currentPage: '/original',
+                      })
+                    }}
+                  >
+                    Andere toekomst
+                  </Button>
+                </div>
               </>
             )}
           </div>
 
           <footer className="flex items-end justify-between">
-            <p className="text-5xl font-black text-white xl:text-7xl">
+            <p className="text-5xl font-black text-white xl:text-6xl">
               <span className="text-stroke">EXPO </span> <br />
               50 JAAR
               <br />
@@ -317,7 +323,7 @@ export default () => {
           </footer>
         </div>
 
-        {/* green background */}
+        {/* green background opacity 60% */}
         <div className="h-screen w-2/12 rounded-tl-[100px] bg-e17-primary-200 opacity-60" />
       </aside>
 
