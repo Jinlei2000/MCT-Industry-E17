@@ -57,7 +57,6 @@ export default () => {
               src={photo.url}
               alt={'Original photo'}
               fill
-              quality={100}
               onLoadingComplete={() => setIsLoadedImg(false)}
             />
           )}
