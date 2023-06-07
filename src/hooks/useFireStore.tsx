@@ -129,6 +129,7 @@ export default () => {
       const newConfig = doc.data()
 
       const pathname = window.location.pathname
+      
 
       // go to the page if isChangePage is true
       if (isChangePage && newConfig?.currentPage != pathname) {
