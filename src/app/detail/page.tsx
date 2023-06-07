@@ -82,7 +82,6 @@ export default () => {
                 src={`${picUrl}`}
                 alt={`AI generated photo of ${config.selectedTag}`}
                 fill={true}
-                quality={100}
                 onLoadingComplete={() => {
                   setIsLoadedAiImgs(prev => {
                     const newIsLoadedAiImgs = [...prev]
