@@ -76,18 +76,17 @@ export default () => {
 
   return (
     <main className="flex h-screen flex-col items-center justify-center ">
-      
       <img
-        className="object-cover fixed z-0 h-screen"
+        className="fixed z-0 h-screen object-cover"
         src="/hong-kong-traffic-view.png"
         alt="foto"
       />
 
-      <div className='z-10 bg-e17-primary-200/95 w-screen h-screen'>
-        <div className='flex justify-center'>
+      <div className="z-10 h-screen w-screen bg-e17-primary-200/95">
+        <div className="flex justify-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="absolute -top-4 w-40 h-40"
+            className="absolute -top-4 h-40 w-40"
             viewBox="0 0 153.925 239.241"
           >
             <g transform="translate(-22.233 -38.836)" opacity="0.95">
@@ -155,20 +154,21 @@ export default () => {
             </g>
           </svg>
         </div>
-        <div className='flex flex-col items-center justify-center h-screen'>
-          <div className="mx-8 text-2xl font-medium text-center text-white">Uw download is begonnen, zoniet gebruik deze knop </div>
+        <div className="flex h-screen flex-col items-center justify-center">
+          <div className="mx-8 text-center text-2xl font-medium text-white">
+            Uw download is begonnen, zoniet gebruik deze knop{' '}
+          </div>
           {downloadUrls && downloadUrls.length > 0 && (
             <Button
-              title="Download"
               handleClick={() => {
                 downloadImages(downloadUrls)
               }}
-            />
+            >
+              Download
+            </Button>
           )}
         </div>
-        <div className="flex ">
-          
-        </div>
+        <div className="flex "></div>
       </div>
     </main>
   )

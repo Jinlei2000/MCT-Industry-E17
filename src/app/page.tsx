@@ -43,11 +43,11 @@ export default function Home() {
         onLoadedData={() => setIsLoadedVideo(true)}
       />
 
-      <div className="absolute bottom-0 left-0 z-[1] flex w-screen justify-between bg-gradient-to-t from-black to-transparent">
-        <p className="py-8 pl-5 text-5xl font-bold text-white">
-          Kijk in de toekomst van de E17 via de tablet
+      <div className="absolute bottom-0 left-0 z-[1] flex h-1/6 w-screen justify-between bg-gradient-to-t from-[#545454] to-transparent">
+        <p className="my-auto w-full text-center text-5xl font-semibold text-white">
+          Verbeeld hier jouw visie op de toekomst van de snelweg
         </p>
-        <div className="w-2/6" />
+        <div className="w-1/6" />
       </div>
     </main>
   )

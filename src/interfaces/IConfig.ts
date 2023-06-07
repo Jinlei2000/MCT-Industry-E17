@@ -3,4 +3,5 @@ export default interface IConfig {
   photoId?: string
   photoType?: string
   selectedTag?: string
+  description?: string
 }
