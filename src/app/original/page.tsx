@@ -4,6 +4,7 @@ import SideBar from '@/components/SideBar'
 import useFireStore from '@/hooks/useFireStore'
 import IConfig from '@/interfaces/IConfig'
 import IPhoto from '@/interfaces/IPhoto'
+import ExportedImage from 'next-image-export-optimizer'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
@@ -55,13 +56,23 @@ export default () => {
 
           {/* show original photo */}
           {photo.url && (
-            <Image
+            // <Image
+            //   className="object-cover "
+            //   src={photo.url}
+            //   alt={'Original photo'}
+            //   fill
+            //   priority
+            //   onLoadingComplete={() => setIsLoadedImg(false)}
+            // />
+
+            <ExportedImage
               className="object-cover "
               src={photo.url}
               alt={'Original photo'}
               fill
               priority
               onLoadingComplete={() => setIsLoadedImg(false)}
+              placeholder="blur"
             />
           )}
 

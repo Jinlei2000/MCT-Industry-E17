@@ -4,6 +4,7 @@ import SideBar from '@/components/SideBar'
 import useFireStore from '@/hooks/useFireStore'
 import IConfig from '@/interfaces/IConfig'
 import IPhoto from '@/interfaces/IPhoto'
+import ExportedImage from 'next-image-export-optimizer'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
@@ -76,7 +77,7 @@ export default () => {
         <div className="grid h-screen w-5/6 grid-cols-2 grid-rows-2">
           {generatedPics.map((picUrl, index) => (
             <div key={index} className="relative">
-              <Image
+              {/* <Image
                 key={`${index}-image`}
                 className="object-cover"
                 src={`${picUrl}`}
@@ -90,6 +91,23 @@ export default () => {
                     return newIsLoadedAiImgs
                   })
                 }}
+              /> */}
+
+              <ExportedImage
+                key={`${index}-image`}
+                className="object-cover"
+                src={`${picUrl}`}
+                alt={`AI generated photo of ${config.selectedTag}`}
+                fill
+                priority
+                onLoadingComplete={() => {
+                  setIsLoadedAiImgs(prev => {
+                    const newIsLoadedAiImgs = [...prev]
+                    newIsLoadedAiImgs[index] = false
+                    return newIsLoadedAiImgs
+                  })
+                }}
+                placeholder="blur"
               />
             </div>
           ))}

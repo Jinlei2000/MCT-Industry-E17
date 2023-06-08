@@ -6,6 +6,7 @@ import JSZip from 'jszip'
 import { useEffect, useState } from 'react'
 import IPhoto from '@/interfaces/IPhoto'
 import Image from 'next/image'
+import ExportedImage from 'next-image-export-optimizer'
 
 export default () => {
   const { getPhotoById, getConfig } = useFireStore()
@@ -79,12 +80,13 @@ export default () => {
 
   return (
     <main className="">
-      <Image
+      <ExportedImage
         className="object-cover"
-        src="/hong-kong-traffic-view.png"
-        alt="foto"
+        src="images/hong-kong-traffic-view.png"
+        alt="Hong Kong Traffic View Background Image"
         fill
         priority
+        placeholder="blur"
       />
 
       <div className="absolute z-10 h-screen w-screen bg-e17-primary-200/95">
