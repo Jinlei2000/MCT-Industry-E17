@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbo",
-    "build": "next build",
+    "build": "next build && next export && next-image-export-optimizer",
     "start": "next start",
     "lint": "next lint"
   },
@@ -19,6 +19,7 @@
     "jszip": "^3.10.1",
     "lucide-react": "^0.221.0",
     "next": "13.4.2",
+    "next-image-export-optimizer": "^1.7.0",
     "postcss": "8.4.23",
     "qrcode.react": "^3.1.0",
     "react": "18.2.0",
