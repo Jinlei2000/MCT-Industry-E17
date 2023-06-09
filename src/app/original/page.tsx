@@ -4,6 +4,7 @@ import SideBar from '@/components/SideBar'
 import useFireStore from '@/hooks/useFireStore'
 import IConfig from '@/interfaces/IConfig'
 import IPhoto from '@/interfaces/IPhoto'
+import ExportedImage from 'next-image-export-optimizer'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
