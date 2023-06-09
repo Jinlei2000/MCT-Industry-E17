@@ -1,61 +1,40 @@
 'use client'
-import SideBar from '@/components/SideBar'
-import VideoSkeleton from '@/components/VideoSkeleton'
-import useFireStore from '@/hooks/useFireStore'
-import { useEffect, useState } from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
 
-export default function Home() {
-  const { listenToChangeConfig } = useFireStore()
-  const [isLoadedVideo, setIsLoadedVideo] = useState(false)
-
-  useEffect(() => {
-    listenToChangeConfig(() => {})
-  }, [])
-
-  const customTitle = () => {
-    return (
-      <>
-        <p className="rotate-90 text-center text-5xl font-black text-white">
-          <span className="text-stroke">EXPO </span> <br />
-          50 JAAR
-          <br />
-          E3/E17
-        </p>
-      </>
-    )
-  }
-
+export default function ChooseScreen() {
   return (
-    <main className="relative h-screen w-screen overflow-hidden">
-      <SideBar title={customTitle} />
+    <main className="">
+      <Image
+        className="object-cover"
+        src="/images/hong-kong-traffic-view.png"
+        alt="Hong Kong Traffic View Background Image"
+        fill
+        priority
+        
+      />
 
-      {/* skeleton video */}
-      {!isLoadedVideo && <VideoSkeleton className="h-full w-5/6" />}
-
-      {/* video */}
-      <video
-        autoPlay
-        muted
-        loop
-        id="E17 highway"
-        className="h-screen w-screen object-cover"
-        onLoadedData={() => {
-          // set timer 1 sec and set false
-          setTimeout(() => {
-            setIsLoadedVideo(true)
-          }, 1000)
-        }}
-      >
-        <source src="/video.mov" />
-        {/* <source src="/video.mp4" />
-        <source src="/video.webm" /> */}
-      </video>
-
-      <div className="absolute bottom-0 left-0 z-[1] flex h-1/6 w-screen justify-between bg-gradient-to-t from-[#545454] to-transparent">
-        <p className="my-auto w-full text-center text-5xl font-semibold text-white">
-          Verbeeld hier jouw visie op de toekomst van de snelweg
-        </p>
-        <div className="w-1/6" />
+      <div className="absolute z-10 h-screen w-screen bg-e17-primary-200/95">
+        <div className="flex h-screen flex-col items-center justify-center">
+          <p className="mb-6 text-center text-2xl font-bold text-white md:mb-8 md:text-3xl lg:text-4xl xl:text-6xl">
+            Kies een scherm
+          </p>
+          <div className="flex gap-6">
+            <Link
+              href="/home"
+              className="flex h-20 w-44 items-center justify-center bg-e17-secondary-700 text-2xl font-bold text-white xl:h-24 xl:w-60 xl:text-3xl"
+            >
+              foto
+            </Link>
+            <Link
+              href="/controls"
+              className="flex h-20 w-44 items-center justify-center bg-e17-secondary-700 text-center text-2xl font-bold text-white xl:h-24 xl:w-60 xl:text-3xl"
+            >
+              bediening
+            </Link>
+          </div>
+        </div>
+        <div className="flex "></div>
       </div>
     </main>
   )
