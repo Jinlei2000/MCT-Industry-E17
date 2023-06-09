@@ -80,13 +80,12 @@ export default () => {
 
   return (
     <main className="">
-      <ExportedImage
+      <Image
         className="object-cover"
         src="images/hong-kong-traffic-view.png"
         alt="Hong Kong Traffic View Background Image"
         fill
         priority
-        placeholder="blur"
       />
 
       <div className="absolute z-10 h-screen w-screen bg-e17-primary-200/95">

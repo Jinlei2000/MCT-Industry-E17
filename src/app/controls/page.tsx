@@ -10,7 +10,6 @@ import { ArrowLeft } from 'lucide-react'
 import useHostUrl from '@/hooks/useHostUrl'
 import ImageSkeleton from '@/components/ImageSkeleton'
 import Title from '@/components/Title'
-import ExportedImage from 'next-image-export-optimizer'
 
 export default () => {
   const {
@@ -63,19 +62,10 @@ export default () => {
       )}
 
       {/* background image */}
-      {/* <Image
+      <Image
         className="h-screen w-screen object-cover"
         src="/hong-kong-traffic-view.png"
         alt="Hong Kong Traffic View"
-        fill
-        priority
-        onLoadingComplete={() => setIsLoaded(false)}
-      /> */}
-
-      <ExportedImage
-        src="images/hong-kong-traffic-view.png"
-        alt="Hong Kong Traffic View Background Image"
-        className="h-screen w-screen object-cover"
         fill
         priority
         onLoadingComplete={() => setIsLoaded(false)}

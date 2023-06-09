@@ -56,23 +56,13 @@ export default () => {
 
           {/* show original photo */}
           {photo.url && (
-            // <Image
-            //   className="object-cover "
-            //   src={photo.url}
-            //   alt={'Original photo'}
-            //   fill
-            //   priority
-            //   onLoadingComplete={() => setIsLoadedImg(false)}
-            // />
-
-            <ExportedImage
+            <Image
               className="object-cover "
               src={photo.url}
               alt={'Original photo'}
               fill
               priority
               onLoadingComplete={() => setIsLoadedImg(false)}
-              placeholder="blur"
             />
           )}
 

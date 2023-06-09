@@ -10,6 +10,7 @@ import {
   updateDoc,
   getDoc,
 } from 'firebase/firestore'
+import { getStorage, ref, listAll } from 'firebase/storage'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
@@ -129,7 +130,6 @@ export default () => {
       const newConfig = doc.data()
 
       const pathname = window.location.pathname
-      
 
       // go to the page if isChangePage is true
       if (isChangePage && newConfig?.currentPage != pathname) {

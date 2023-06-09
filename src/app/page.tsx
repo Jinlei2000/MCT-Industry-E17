@@ -34,7 +34,6 @@ export default function Home() {
 
       {/* video */}
       <video
-        src="/video.mov"
         autoPlay
         muted
         loop
@@ -46,7 +45,11 @@ export default function Home() {
             setIsLoadedVideo(true)
           }, 1000)
         }}
-      />
+      >
+        <source src="/video.mov" />
+        {/* <source src="/video.mp4" />
+        <source src="/video.webm" /> */}
+      </video>
 
       <div className="absolute bottom-0 left-0 z-[1] flex h-1/6 w-screen justify-between bg-gradient-to-t from-[#545454] to-transparent">
         <p className="my-auto w-full text-center text-5xl font-semibold text-white">
