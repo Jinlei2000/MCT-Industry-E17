@@ -147,7 +147,7 @@ export default () => {
       setTimer(
         setTimeout(() => {
           updateConfig({
-            currentPage: '/',
+            currentPage: '/home',
             photoId: '',
             photoType: '',
             selectedTag: '',

@@ -81,7 +81,7 @@ export default () => {
     <main className="">
       <Image
         className="object-cover"
-        src="images/hong-kong-traffic-view.png"
+        src="/images/hong-kong-traffic-view.png"
         alt="Hong Kong Traffic View Background Image"
         fill
         priority

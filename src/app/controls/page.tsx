@@ -3,13 +3,13 @@ import Button from '@/components/Button'
 import useFireStore from '@/hooks/useFireStore'
 import IConfig from '@/interfaces/IConfig'
 import IPhoto from '@/interfaces/IPhoto'
-import { QRCodeSVG } from 'qrcode.react'
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { ArrowLeft } from 'lucide-react'
 import useHostUrl from '@/hooks/useHostUrl'
 import ImageSkeleton from '@/components/ImageSkeleton'
 import Title from '@/components/Title'
+import { QRCodeSVG } from 'qrcode.react'
 
 export default () => {
   const {
@@ -33,10 +33,10 @@ export default () => {
   useEffect(() => {
     listenToChangeConfig((config: IConfig) => {
       setControls({
-        showType: config?.currentPage === '/',
+        showType: config?.currentPage === '/home',
         showTags:
           config?.currentPage === '/original' && config?.selectedTag === '',
-        showBack: config?.currentPage !== '/',
+        showBack: config?.currentPage !== '/home',
         showSelectedTag:
           config?.selectedTag != '' && config?.currentPage === '/detail',
       })
@@ -64,7 +64,7 @@ export default () => {
       {/* background image */}
       <Image
         className="h-screen w-screen object-cover"
-        src="/hong-kong-traffic-view.png"
+        src="/images/hong-kong-traffic-view.png"
         alt="Hong Kong Traffic View"
         fill
         priority
@@ -86,7 +86,7 @@ export default () => {
                   className="bg-transparent"
                   onClick={() => {
                     updateConfig({
-                      currentPage: '/',
+                      currentPage: '/home',
                       photoId: '',
                       photoType: '',
                       selectedTag: '',
