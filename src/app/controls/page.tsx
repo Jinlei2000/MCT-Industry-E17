@@ -288,7 +288,7 @@ export default () => {
                         setRandomPhotoIdByType(config.photoType)
                     }}
                   >
-                    Nieuwe foto
+                    nieuwe foto
                   </Button>
                   <Button
                     handleClick={() => {
@@ -298,7 +298,7 @@ export default () => {
                       })
                     }}
                   >
-                    Andere toekomst
+                    andere toekomst
                   </Button>
                 </div>
               </>
