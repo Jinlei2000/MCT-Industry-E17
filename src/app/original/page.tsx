@@ -32,7 +32,7 @@ export default () => {
     return (
       <>
         <div className="rotate-90 text-center text-5xl font-black text-white">
-          Origineel <span className="text-stroke">foto</span>
+          Originele <span className="text-stroke">foto</span>
         </div>
       </>
     )
