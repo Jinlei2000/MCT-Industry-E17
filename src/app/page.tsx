@@ -24,13 +24,13 @@ export default function ChooseScreen() {
               href="/home"
               className="flex h-20 w-44 items-center justify-center bg-e17-secondary-700 text-2xl font-bold text-white xl:h-24 xl:w-60 xl:text-3xl"
             >
-              foto
+              display
             </Link>
             <Link
               href="/controls"
               className="flex h-20 w-44 items-center justify-center bg-e17-secondary-700 text-center text-2xl font-bold text-white xl:h-24 xl:w-60 xl:text-3xl"
             >
-              bediening
+              controls
             </Link>
           </div>
         </div>
