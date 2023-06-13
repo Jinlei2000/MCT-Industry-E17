@@ -6,7 +6,7 @@ import useLocalStorage from '@/hooks/useLocalStorage'
 import { useRouter } from 'next/navigation'
 
 export default () => {
-  const { setPhotoType } = useLocalStorage()
+  const { setConfig } = useLocalStorage()
   const router = useRouter()
 
   return (
@@ -19,12 +19,11 @@ export default () => {
         {/* buttons */}
         <div className="grid h-full place-content-center">
           {/* show type buttons */}
-
           <Title>Kies een perspectief</Title>
           <div className="grid grid-cols-2 gap-4 xl:gap-6">
             <Button
               handleClick={() => {
-                setPhotoType('skyPics')
+                setConfig({ photoType: 'skyPics' })
                 router.push('/website/original')
               }}
             >
@@ -34,7 +33,7 @@ export default () => {
             </Button>
             <Button
               handleClick={() => {
-                setPhotoType('groundPics')
+                setConfig({ photoType: 'groundPics' })
                 router.push('/website/original')
               }}
             >
