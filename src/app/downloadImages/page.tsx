@@ -6,6 +6,7 @@ import JSZip from 'jszip'
 import { useEffect, useState } from 'react'
 import IPhoto from '@/interfaces/IPhoto'
 import Image from 'next/image'
+import useWaterMark from '@/hooks/useWaterMark'
 
 export default () => {
   const { getPhotoById, getConfig } = useFireStore()
@@ -14,8 +15,10 @@ export default () => {
   const [imageTag, setImageTag] = useState<string>('')
   const [urls, setUrls] = useState<string[]>([])
   const [isDownloading, setIsDownloading] = useState<boolean>(false)
+  const { AddWaterMarkToImage } = useWaterMark()
 
   useEffect(() => {
+    
     getPhotoById().then(photo => {
       setPhoto(photo)
     })
@@ -61,11 +64,11 @@ export default () => {
       const filename = `Leiedal-${getImageName(downloadUrl)}`
 
       // get image blob
-      const response = await fetch(downloadUrl)
-      const blob = await response.blob()
+      const blobImage = await AddWaterMarkToImage(downloadUrl)
+      console.log(blobImage)
 
       // add file to zip
-      zip.file(filename, blob)
+      zip.file(filename, blobImage)
     }
 
     // generate zip file
