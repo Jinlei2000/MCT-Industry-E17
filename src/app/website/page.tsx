@@ -10,7 +10,7 @@ export default () => {
   const router = useRouter()
 
   return (
-    <main className="relative h-screen w-screen">
+    <main className="relative h-screen w-screen overflow-hidden">
       {/* video with skeleton */}
       <Video />
 

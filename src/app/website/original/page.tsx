@@ -1,10 +1,13 @@
 'use client'
 import Button from '@/components/Button'
+import ImageSkeleton from '@/components/ImageSkeleton'
 import Title from '@/components/Title'
 import useFireStore from '@/hooks/useFireStore'
 import useLocalStorage from '@/hooks/useLocalStorage'
+import IConfig from '@/interfaces/IConfig'
 import IPhoto from '@/interfaces/IPhoto'
 import { ArrowLeft } from 'lucide-react'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
@@ -13,19 +16,24 @@ export default () => {
     useLocalStorage()
   const { getRandomPhotoIdByType } = useFireStore()
   const [photo, setPhotoNow] = useState<IPhoto>()
-  const [description, setDescription] = useState<string>()
   const router = useRouter()
+  const [isLoadedImg, setIsLoadedImg] = useState(true)
+  const [config, setConfigNow] = useState<IConfig>()
 
   useEffect(() => {
     getConfig().then(config => {
       if (config.photoType !== '' || config.photoType !== null) {
         getPhoto().then(photo => {
-          console.log(photo)
           if (photo) {
             setPhotoNow(photo)
+            getConfig().then(config => {
+              console.log(config)
+              setConfigNow(config)
+            })
           } else {
             getRandomPhotoIdByType(config.photoType).then(data => {
-              setDescription(data.description)
+              setConfigNow({ ...config, description: data.description })
+              setConfig({ ...config, description: data.description })
               setPhoto(data.photo)
               setPhotoNow(data.photo)
             })
@@ -40,8 +48,37 @@ export default () => {
 
   return (
     <main>
+      {/* skeleton loader */}
+      {isLoadedImg && (
+        <ImageSkeleton
+          border={false}
+          className="absolute z-[2] h-full w-full"
+        />
+      )}
+
+      {/* show original photo */}
+      {photo && photo.url && (
+        <Image
+          className="object-cover "
+          src={photo.url}
+          alt={'Original photo'}
+          fill
+          priority
+          onLoadingComplete={() => setIsLoadedImg(false)}
+        />
+      )}
+
+      {/* show description */}
+      {!isLoadedImg && config && config.description && (
+        <div className="fixed bottom-24 left-20 max-w-5xl">
+          <div className="text-shadow font-extrabold text-white xl:text-5xl">
+            {config.description}
+          </div>
+        </div>
+      )}
+
       {/* controls */}
-      <aside className="fixed bottom-0 right-0 h-96 w-4/12 bg-e17-primary-200">
+      <aside className="fixed bottom-0 right-0 z-50 h-96 w-4/12 bg-e17-primary-200">
         {/*back button */}
         <div className="flex items-center gap-4 pt-8 xl:gap-6 xl:pt-12">
           {/* go back button */}
@@ -70,7 +107,6 @@ export default () => {
                     handleClick={() => {
                       setConfig({
                         selectedTag: tag,
-                        description: description,
                       })
                       router.push('/website/detail')
                     }}
