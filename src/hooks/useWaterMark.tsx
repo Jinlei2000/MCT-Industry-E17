@@ -1,6 +1,6 @@
 export default () => {
   // make a post get blob
-  const getWaterMark = async () => {
+  const AddWaterMarkToImage = async (url:String) => {
     return fetch('https://quickchart.io/watermark', {
       method: 'POST',
       headers: {
@@ -8,9 +8,9 @@ export default () => {
       },
       body: JSON.stringify({
         mainImageUrl:
-          'https://firebasestorage.googleapis.com/v0/b/jaar-e17-ai.appspot.com/o/1%2F1-1_DIS.jpg?alt=media',
+          url,
         markImageUrl:
-          'https://www.leiedal.be/sites/default/files/styles/medium/public/contact/logo%20LEIEDAL%20dark%20-%2025x25mm.jpg',
+          'https://firebasestorage.googleapis.com/v0/b/jaar-e17-ai.appspot.com/o/logo%2Flogo_leiedal.png?alt=media',
         markRatio: 0.25,
       }),
     })
@@ -22,6 +22,6 @@ export default () => {
   }
 
   return {
-    getWaterMark,
+    AddWaterMarkToImage,
   }
 }

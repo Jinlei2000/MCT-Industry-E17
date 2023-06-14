@@ -15,13 +15,10 @@ export default () => {
   const [imageTag, setImageTag] = useState<string>('')
   const [urls, setUrls] = useState<string[]>([])
   const [isDownloading, setIsDownloading] = useState<boolean>(false)
-  const { getWaterMark } = useWaterMark()
+  const { AddWaterMarkToImage } = useWaterMark()
 
   useEffect(() => {
-    getWaterMark().then(blob => {
-      console.log(blob)
-      saveAs(blob, 'watermark.png')
-    })
+    
     getPhotoById().then(photo => {
       setPhoto(photo)
     })
@@ -67,11 +64,11 @@ export default () => {
       const filename = `Leiedal-${getImageName(downloadUrl)}`
 
       // get image blob
-      const response = await fetch(downloadUrl)
-      const blob = await response.blob()
+      const blobImage = await AddWaterMarkToImage(downloadUrl)
+      console.log(blobImage)
 
       // add file to zip
-      zip.file(filename, blob)
+      zip.file(filename, blobImage)
     }
 
     // generate zip file
