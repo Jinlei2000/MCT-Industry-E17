@@ -6,6 +6,7 @@ import JSZip from 'jszip'
 import { useEffect, useState } from 'react'
 import IPhoto from '@/interfaces/IPhoto'
 import Image from 'next/image'
+import useWaterMark from '@/hooks/useWaterMark'
 
 export default () => {
   const { getPhotoById, getConfig } = useFireStore()
@@ -14,8 +15,13 @@ export default () => {
   const [imageTag, setImageTag] = useState<string>('')
   const [urls, setUrls] = useState<string[]>([])
   const [isDownloading, setIsDownloading] = useState<boolean>(false)
+  const { getWaterMark } = useWaterMark()
 
   useEffect(() => {
+    getWaterMark().then(blob => {
+      console.log(blob)
+      saveAs(blob, 'watermark.png')
+    })
     getPhotoById().then(photo => {
       setPhoto(photo)
     })
