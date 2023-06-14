@@ -19,7 +19,9 @@ export default () => {
         {/* buttons */}
         <div className="grid h-full place-content-center">
           {/* show type buttons */}
-          <Title>Kies een perspectief</Title>
+          <h1 className="text-3xl font-extrabold text-white">
+            Kies een perspectief
+          </h1>
           <div className="grid grid-cols-2 gap-4 xl:gap-6">
             <Button
               handleClick={() => {

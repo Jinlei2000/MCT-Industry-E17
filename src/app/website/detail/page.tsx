@@ -97,7 +97,7 @@ export default () => {
               router.push('/website')
             }}
           >
-            <ArrowLeft className="h-8 w-8 stroke-[2.5px] text-white xl:h-14 xl:w-14 xl:stroke-[3px] " />
+            <ArrowLeft className="h-8 w-8 stroke-[2.5px] text-white" />
           </button>
         </div>
 

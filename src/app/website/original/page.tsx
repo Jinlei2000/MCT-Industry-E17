@@ -90,14 +90,16 @@ export default () => {
               router.push('/website')
             }}
           >
-            <ArrowLeft className="h-8 w-8 stroke-[2.5px] text-white xl:h-14 xl:w-14 xl:stroke-[3px] " />
+            <ArrowLeft className="h-8 w-8 stroke-[2.5px] text-white" />
           </button>
         </div>
 
         {/* buttons */}
         <div className="">
           {/* show tags buttons */}
-          <Title>Welke toekomst kies jij?</Title>
+          <h1 className="text-3xl font-extrabold text-white">
+            Welke toekomst kies jij?
+          </h1>
           <div className="grid grid-cols-2 gap-4 xl:gap-6">
             {photo && photo.tags && (
               <>
