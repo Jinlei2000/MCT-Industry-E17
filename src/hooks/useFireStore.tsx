@@ -10,7 +10,6 @@ import {
   updateDoc,
   getDoc,
 } from 'firebase/firestore'
-import { getStorage, ref, listAll } from 'firebase/storage'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
@@ -81,6 +80,35 @@ export default () => {
       selectedTag: '',
       description: description,
     })
+  }
+
+  // get random photo id by type & description
+  const getRandomPhotoIdByType = async (picsType: string) => {
+    const querySnapshot = await getDocs(collection(db, picsType))
+    const photosId: string[] = []
+    querySnapshot.forEach(doc => {
+      photosId.push(doc.id)
+    })
+
+    const randomIndex = Math.floor(Math.random() * photosId.length)
+
+    let photo: IPhoto = {}
+    const docRef = doc(db, picsType, photosId[randomIndex])
+    // get groundPics or skyPics document
+    const docSnap = await getDoc(docRef)
+    photo = { ...(docSnap.data() as IPhoto) }
+    // get generatedPics subcollection
+    const docSnap2 = await getDocs(collection(docRef, 'generatedPics'))
+    docSnap2.forEach(doc => {
+      photo.generatedPics = { ...doc.data() }
+    })
+
+    const description = await getRandomDescription()
+
+    return {
+      photo: photo,
+      description: description,
+    }
   }
 
   // get photo by id
@@ -167,5 +195,6 @@ export default () => {
     getPhotoById,
     listenToChangeConfig,
     autoGoBackTimer,
+    getRandomPhotoIdByType,
   }
 }
