@@ -1,13 +1,11 @@
 'use client'
 import SideBar from '@/components/SideBar'
 import Video from '@/components/Video'
-import VideoSkeleton from '@/components/VideoSkeleton'
 import useFireStore from '@/hooks/useFireStore'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 export default () => {
   const { listenToChangeConfig } = useFireStore()
-  const [isLoadedVideo, setIsLoadedVideo] = useState(false)
 
   useEffect(() => {
     listenToChangeConfig(() => {})

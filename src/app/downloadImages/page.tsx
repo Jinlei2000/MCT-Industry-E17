@@ -18,7 +18,6 @@ export default () => {
   const { AddWaterMarkToImage } = useWaterMark()
 
   useEffect(() => {
-    
     getPhotoById().then(photo => {
       setPhoto(photo)
     })
