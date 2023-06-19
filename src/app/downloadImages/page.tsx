@@ -161,9 +161,15 @@ export default () => {
           </svg>
         </div>
         <div className="flex h-screen flex-col items-center justify-center">
-          <p className="mb-6 text-center text-2xl font-bold text-white md:mb-8 md:text-3xl lg:text-4xl xl:text-6xl">
-            Download your images
-          </p>
+          {urls && urls.length > 0 && !isDownloading ? (
+            <p className="mb-6 text-center text-2xl font-bold text-white md:mb-8 md:text-3xl lg:text-4xl xl:text-6xl">
+              Download hier de foto's
+            </p>
+          ) : (
+            <p className="mb-6 text-center text-2xl font-bold text-white md:mb-8 md:text-3xl lg:text-4xl xl:text-6xl">
+              Even geduld...
+            </p>
+          )}
           {urls && urls.length > 0 && !isDownloading ? (
             <button
               className="h-20 w-44 bg-e17-secondary-700 text-2xl font-bold text-white xl:h-24 xl:w-60 xl:text-3xl"
